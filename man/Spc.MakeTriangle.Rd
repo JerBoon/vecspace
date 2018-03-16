@@ -13,9 +13,10 @@ Spc.MakeTriangle(A, B, C, properties = NA)
 Default NA}
 }
 \value{
-Elementary triangle object. The function does not check that the 
-  3 input points are not colinear. If this is the case, the result won't be much
-  of a triangle, and will simply define a zero area line.
+Elementary triangle object. The function neither checks that the 
+  3 input points are not colinear, nor that any of the 3 points are equal.
+  Expect odd-ish results in either of those cases, since the resulting
+  object will we either a line or a point with zero area.
 }
 \description{
 Return an elementary triangle object

@@ -37,12 +37,12 @@ Everything in my world is (currently) made of triangles, spheres, and planes.
 I've also included a simple compound object (the cuboid) which will hopefully demonstrate how this stuff works.
 
 A cuboid is a rectangular generalisation of a cube, which is made of six rectangular faces. In my world, a rectangular face can
-be constructed by adding 2 abutting triangles. The collection of the six faces can be grouped into a list, and common proprties
-applied to either the cube as a whole, each individual face, or (if you really want to) each indivdiual triangle.
+be constructed by adding 2 abutting triangles. The collection of the six faces can be grouped into a list, and common properties
+applied to either the cube as a whole, each individual face, or (if you really want to) each individual triangle.
 
 Finally, a "bounding volume" can be construted around the cuboid, which in my world in a sphere which fully encloses all of
 the components of the cube. It's therefore a hierarchical tree of objects, which can be scanned by a lightray (i.e. to test
-for intersection) by testing first against the bounding sphere, and then only if it inetrsects *that* do we need to test for
+for intersection) by testing first against the bounding sphere, and then only if it intersects *that* do we need to test for
 intersection with each elementary component.
 
 Also, transformation methods (OOP, remember) can be build for each elementary and compound object, such that you can simply say
@@ -50,4 +50,4 @@ Also, transformation methods (OOP, remember) can be build for each elementary an
 the object hierarchy.
 
 Further general constructors will allow you to, say, build a table (use your imagination) from 5 simple cuboid objects, and then
-be able to simply say "rotate my table" in a single statement. 
+be able to simply say "rotate my table" in a single statement. (And or course, the table itself can have a bounding sphere container)

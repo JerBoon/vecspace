@@ -3,6 +3,7 @@
 export(Spc.MakeCuboid)
 export(Spc.MakeSphere)
 export(Spc.MakeTriangle)
+export(Spc.Translate)
 export(Utils.CrossProduct)
 export(Utils.DotProduct)
 export(Utils.UnitVector)
