@@ -38,8 +38,6 @@ Spc.MakeCuboid <- function (centre, dimensions, properties) {
     return(NA)
   }
 
-  cub <- Spc.MakeSphere(centre=c(0,0,0), radius=Utils.VectorLength(dimensions)/2)
-
   d <- dimensions / 2
 
   f1 <- list(Spc.MakeTriangle(c(d[1],d[2],d[3]),
@@ -92,14 +90,10 @@ Spc.MakeCuboid <- function (centre, dimensions, properties) {
 
   ff <- list(f1,f2,f3,f4,f5,f6)
 
-  class(ff) <- append(class(ff),"SpcCompound")
+  r <- Spc.CombineObjects(list(f1,f2,f3,f4,f5,f6), properties, TRUE)
 
-  attr(ff,"properties") <- properties
+  r <- .Spc.Translate(centre, r)
 
-  cub$objects <- ff
-
-  cub <- .Spc.Translate(centre,cub)
-
-  return(cub)
+  return(r)
 }
 
