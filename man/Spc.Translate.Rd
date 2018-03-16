@@ -20,3 +20,6 @@ Move the object hierarchy to a different point in space, without performing rota
 \examples{
   my_object <- Spc.Translate (c(0,20,0), my_object)
 }
+\seealso{
+Other transforms: \code{\link{Spc.Rotate}}
+}

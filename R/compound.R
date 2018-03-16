@@ -78,6 +78,16 @@ Spc.CombineObjects <- function (objects, properties=NA, bound=TRUE) {
   return (objects)
 }
 
+#------------------------------------------------------------------------
+
+.Spc.Rotate.SpcCompound <- function(pivot.point,pivot.rotMatrix, objects) {
+
+  for (i in 1:length(objects)) {
+    objects[[i]] <- .Spc.Rotate(pivot.point,pivot.rotMatrix, objects[[i]])
+  }
+  return (objects)
+}
+
 #------------------------------------------------------------------------------
 
 .Spc.BoundRec.SpcCompound <- function(objects) {

@@ -53,6 +53,18 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
 }
 
 #------------------------------------------------------------------------------
+.Spc.Rotate.SpcSphere <- function(pivot.point, pivot.rotMatrix, sphere) {
+
+  sphere$centre <- (pivot.rotMatrix %*% (sphere$centre - pivot.point)) + pivot.point
+
+  if (length(sphere$objects) == 0)
+    return(sphere)
+
+  sphere$objects <- .Spc.Rotate(pivot.point, pivot.rotMatrix, sphere$objects)
+  return(sphere)
+}
+
+#------------------------------------------------------------------------------
 
 .Spc.BoundRec.SpcSphere <- function(sphere) {
 

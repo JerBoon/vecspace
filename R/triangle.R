@@ -49,6 +49,16 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
 }
 
 #------------------------------------------------------------------------------
+.Spc.Rotate.SpcTriangle <- function(pivot.point, pivot.rotMatrix, triangle) {
+
+  triangle$A <- (pivot.rotMatrix %*% (triangle$A - pivot.point)) + pivot.point
+  triangle$B <- (pivot.rotMatrix %*% (triangle$B - pivot.point)) + pivot.point
+  triangle$C <- (pivot.rotMatrix %*% (triangle$C - pivot.point)) + pivot.point
+
+  return(triangle)
+}
+
+#------------------------------------------------------------------------------
 
 .Spc.BoundRec.SpcTriangle <- function(triangle) {
 

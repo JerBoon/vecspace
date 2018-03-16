@@ -29,6 +29,54 @@ Spc.Translate <- function(move.direction,object) {
 
 
 #---------------------------------------------------------------------
+#' Rotate an object by c(ax,ay,az) in the x y and z planes, about the point c(x,y,z) 
+#' Uses the right-hand coordinate system (this is the only functin in this package which is handed in this way).
+#' Rotates about first the x axis, then y, then z. This operation is not commutable (i.e. if you rotate by the various
+#' angles about first z, then x then y, you'd get a different result).
+#'
+#' @param pivot.point Vector of the point in space to rotate about. Defaults to c(0,0,0)
+#' @param pivot.angle Vector of angles to rotate about (x,y,z) - in degrees
+#' @param object The object (elementary or compound) to be rotated
+#'
+#' @return The same object, but with all appropriate spacial points updated accordingly
+#'
+#' @export
+#'
+#' @family transforms
+#'
+#' @examples
+#'   my_object <- Spc.Rotate(c(0,0,0),c(45,0,0),my_object)
+
+Spc.Rotate <- function(pivot.point=c(0,0,0), pivot.angle, object) {
+
+  #Degrees to radians constant
+  pic <- (2 * pi) / 360
+
+  #From https://en.wikipedia.org/wiki/Rotation_matrix
+  rotx <- matrix(c(1,0,0,0,cos(pivot.angle[1]*pic),sin(pivot.angle[1]*pic),0,-sin(pivot.angle[1]*pic),cos(pivot.angle[1]*pic)),ncol=3)
+  roty <- matrix(c(cos(pivot.angle[2]*pic),0,-sin(pivot.angle[2]*pic),0,1,0,sin(pivot.angle[2]*pic),0,cos(pivot.angle[2]*pic)),ncol=3)
+  rotz <- matrix(c(cos(pivot.angle[3]*pic),sin(pivot.angle[3]*pic),0,-sin(pivot.angle[3]*pic),cos(pivot.angle[3]*pic),0,0,0,1),ncol=3)
+
+  #Combine as rotx, then roty, then rotz
+  # This represents a transformation matrix which can be applied to any vector to perform the whole deal
+  # To transform point in space, need to first subtract pivit.point, then apply [rot], then add pivot.point back
+  # Since the various elementary objects are defined by a mix of points in space, and direction vectors, we'll just pass this 
+  # rotMatrix down through the various transform methods.. 
+  rot <- rotz %*% roty %*% rotx
+
+  .Spc.Rotate(pivot.point, rot, object)
+}
+
+# ------- And the corresponding class function definition
+# Declared as separate function, since the elementary classes want to be hiiden, and roxygen
+# if I understand correctly requires a separate definition (??)
+
+.Spc.Rotate <- function(pivot.point, pivot.rotMatrix, object) {
+  UseMethod(".Spc.Rotate", object)
+}
+
+
+#---------------------------------------------------------------------
 #' Find the distance at which a ray first intersects with an object, plus any relevant object
 #' properties at the point of intersection
 #'
