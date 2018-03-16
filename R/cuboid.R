@@ -26,7 +26,7 @@
 #' @examples
 #'   w <- Spc.MakeCuboid(c(0,0,0), c(2,2,2), surface_props)
 
-Spc.MakeCuboid <- function (centre, dimensions, properties) {
+Spc.MakeCuboid <- function (centre, dimensions, properties=NA) {
 
   if ((typeof(centre) != "double") || (length(centre) != 3)) {
     print("Spc.MakeCuboid: centre should be a 3 number vector")

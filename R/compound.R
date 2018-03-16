@@ -59,16 +59,11 @@ Spc.CombineObjects <- function (objects, properties=NA, bound=TRUE) {
   # -- add a bounding sphere --
 
   bndRec <- .Spc.BoundRec.SpcCompound (r)
-  print("--")
-  print(bndRec)
-  print("--")
   spc <- bndRec[[2]] + (bndRec[[1]] - bndRec[[2]]) /2 
-  print(spc)
   spr <- Utils.VectorLength(bndRec[[1]] - bndRec[[2]]) / 2
  
   s <- Spc.MakeSphere(spc,spr)
   s$objects <- r
-
 
   return(s)
 }
