@@ -4,7 +4,7 @@
 #' Return an elementary triangle object
 #'
 #' @param A,B,C A, B, and C define the corners of the triangle in space
-#' @param properties Package-independent object defining additional sphere properties
+#' @param properties Package-independent object defining additional triangle properties.
 #'     Default NA
 #'
 #' @return Elementary triangle object. The function neither checks that the 

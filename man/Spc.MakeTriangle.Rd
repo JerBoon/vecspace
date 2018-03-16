@@ -9,7 +9,7 @@ Spc.MakeTriangle(A, B, C, properties = NA)
 \arguments{
 \item{A, B, C}{A, B, and C define the corners of the triangle in space}
 
-\item{properties}{Package-independent object defining additional sphere properties
+\item{properties}{Package-independent object defining additional triangle properties.
 Default NA}
 }
 \value{
@@ -26,5 +26,5 @@ Return an elementary triangle object
 }
 \seealso{
 Other constructors: \code{\link{Spc.MakeCuboid}},
-  \code{\link{Spc.MakeSphere}}
+  \code{\link{Spc.MakePlane}}, \code{\link{Spc.MakeSphere}}
 }

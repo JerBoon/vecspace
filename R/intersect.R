@@ -67,7 +67,7 @@
 
   #if $objects is defined then the sphere is merely a bounding object
   if (length(sphere$objects) == 0)
-    return(list(distance=t, properties=sphere$properties))
+    return(list(distance=t, properties=attr(sphere,"properties")))
 
   #It's a bounding object, so pass $objects as a list and return that
     return(.Spc.Intersect(ray.origin,ray.direction,sphere$objects))
@@ -82,7 +82,7 @@
   t <- sum((plane$point - ray.origin) * plane$normal) / sum( ray.direction * plane$normal)
 
   if (t >= 0)
-    return (t)
+    return (list(distance=t, properties=attr(plane,"properties")))
   else
    return (NA)
 }

@@ -2,6 +2,7 @@
 
 export(Spc.Intersect)
 export(Spc.MakeCuboid)
+export(Spc.MakePlane)
 export(Spc.MakeSphere)
 export(Spc.MakeTriangle)
 export(Spc.Translate)

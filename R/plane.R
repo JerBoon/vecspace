@@ -1,7 +1,25 @@
 
-#==============================================================================
+#---------------------------------------------------------------------
+#' Return an elementary plane object
+#'
+#' @param point A point on the plane
+#' @param normal A vector which is normal to the direction of the plane
+#' @param properties Package-independent object defining additional plane properties.
+#'     Default NA
+#'
+#' @return Elementary plane object. The function neither checks that the 
+#'   3 input points are not colinear, nor that any of the 3 points are equal.
+#'   Expect odd-ish results in either of those cases, since the resulting
+#'   object will we either a line or a point with zero area.
+#' 
+#' @export
+#'
+#' @family constructors
+#'
+#' @examples
+#'   pl <- Spc.MakePlane(c(0,0,0), c(0,1,0), "Dave")
 
-Spc.MakePlane <- function (point, normal) {
+Spc.MakePlane <- function (point, normal, properties=NA) {
 
   if ((typeof(point) != "double") ||
       length(point) != 3) {
@@ -15,7 +33,12 @@ Spc.MakePlane <- function (point, normal) {
   }
 
   r <- list(point=point,normal=normal)
+
   class(r) = append(class(r),"SpcPlane")
+
+  if (!is.na(properties))
+    attr(r,"properties") <- properties
+
   return(r)
 } 
 
