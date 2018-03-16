@@ -26,7 +26,8 @@ Return a cuboid object, constructed from elementary spacial objects
   w <- Spc.MakeCuboid(c(0,0,0), c(2,2,2), surface_props)
 }
 \seealso{
-Other constructors: \code{\link{Spc.MakePlane}},
+Other constructors: \code{\link{Spc.CombineObjects}},
+  \code{\link{Spc.MakePlane}},
   \code{\link{Spc.MakeSphere}},
   \code{\link{Spc.MakeTriangle}}
 }

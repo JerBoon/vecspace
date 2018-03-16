@@ -25,6 +25,7 @@ Return an elementary triangle object
   t <- Spc.MakeTriangle(c(0,0,0), c(1,1,1), c(2,0,10), surface_props)
 }
 \seealso{
-Other constructors: \code{\link{Spc.MakeCuboid}},
+Other constructors: \code{\link{Spc.CombineObjects}},
+  \code{\link{Spc.MakeCuboid}},
   \code{\link{Spc.MakePlane}}, \code{\link{Spc.MakeSphere}}
 }
