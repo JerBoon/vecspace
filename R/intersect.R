@@ -7,8 +7,8 @@
   #Moller-Trumbore algorith, from
   #https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm
 
-  edge1 <- triangle$point2 - triangle$point1
-  edge2 <- triangle$point3 - triangle$point1
+  edge1 <- triangle$B - triangle$A
+  edge2 <- triangle$C - triangle$A
   h <- Utils.CrossProduct(ray.direction,edge2)
   a <- Utils.DotProduct(edge1,h)
 
@@ -16,7 +16,7 @@
     return(NA)
 
   f <- 1/a
-  s <- ray.origin - triangle$point1
+  s <- ray.origin - triangle$A
   u <- f * Utils.DotProduct(s,h)
 
   if (u < 0 || u > 1)
@@ -32,7 +32,7 @@
   if (t > 0) {
     #print(triangle)
     #print(paste(" intersected at ", t))
-    return(list(distance=t, surface=attr(triangle,"surface")))
+    return(list(distance=t, properties=attr(triangle,"properties")))
   } else
     return(NA)
 }
@@ -40,6 +40,7 @@
 #==============================================================================
 
 .Spc.Intersect.SpcSphere <-function(ray.origin,ray.direction,sphere) {
+
 
   #from http://cosinekitty.com/raytrace/chapter06_sphere.html
   a <- sum(ray.direction^2)
@@ -64,9 +65,9 @@
     return(NA)
 
 
-  #if $objects is defined then teh sphere is merely a bounding object
+  #if $objects is defined then the sphere is merely a bounding object
   if (length(sphere$objects) == 0)
-    return(list(distance=t, surface=sphere$surface))
+    return(list(distance=t, properties=sphere$properties))
 
   #It's a bounding object, so pass $objects as a list and return that
     return(.Spc.Intersect(ray.origin,ray.direction,sphere$objects))

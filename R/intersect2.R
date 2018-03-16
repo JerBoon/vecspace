@@ -16,17 +16,18 @@
   int <- NA
 
   for (i in 1:length(objects)) {
-    ii <- .RTintersect(ray.origin, ray.vector, objects[[i]])
+    ii <- .Spc.Intersect(ray.origin, ray.vector, objects[[i]])
 
     if (!is.na(ii) && (is.na(int) || ii$distance < int$distance))
       int <- ii
   }
+
   #if (is.na(int))
   if (class(int) == "logical")
     return(NA)
 
-  if (is.null(int$surface) || is.na(int$surface)) {
-    int$surface <- attr(objects,"surface")
+  if (is.null(int$properties) || is.na(int$properties)) {
+    int$properties <- attr(objects,"properties")
   }
 
   return(int)
