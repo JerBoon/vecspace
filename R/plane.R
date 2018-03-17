@@ -52,6 +52,15 @@ Spc.MakePlane <- function (point, normal, properties=NA) {
 }
 
 #------------------------------------------------------------------------------
+.Spc.Rotate.SpcPlane <- function(pivot.point, pivot.rotMatrix, plane) {
+
+  plane$point <- (pivot.rotMatrix %*% (plane$point - pivot.point)) + pivot.point
+  plane$normal <- pivot.rotMatrix %*% plane$normal
+
+  return(plane)
+}
+
+#------------------------------------------------------------------------------
 
 .Spc.BoundRec.SpcPlane <- function(plane) {
 
