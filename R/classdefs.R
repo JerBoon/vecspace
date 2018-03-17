@@ -125,6 +125,22 @@ Spc.Intersect <- function(ray.origin,ray.direction,object) {
 #polylines - e.g. think of a sphere, which will be drawn as various latitudes
 #together with various  lines of longitude.
 
+#---------------------------------------------------------------------
+#' Outputs all object coordinates as a list of 3 column matrices corresponding
+#' to (x,y,z) coordinates of relevant points. Treats spheres and planes as special cases,
+#' since these obviously can't be accurately reproduced in wire-frame form
+#'
+#' @param object The object (elementary or compound) to be plotted
+#'
+#' @return List of matrices
+#'
+#' @export
+#'
+#' @family outputs
+#'
+#' @examples
+#'   Spc.AsPolylines (my_world)
+
 Spc.AsPolylines <- function(obj) {
   .Spc.Polylines(obj)
 }
