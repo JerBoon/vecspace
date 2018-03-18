@@ -5,6 +5,7 @@
 #' @param object The object (elementary or compound) to be plotted
 #' @param view.axis Set to "X","Y" or "Z" to only plot the view along that axis.
 #'    Otherwise will plot all 3 views together.
+#'  @param print.bounds Should it display bounding volumes? Default = TRUE
 #'
 #' @export
 #'
@@ -14,7 +15,7 @@
 #'   Spc.Plot (my_world)
 
 
-Spc.Plot <- function (object, view.axis=NA) {
+Spc.Plot <- function (object, view.axis=NA, print.bounds=TRUE) {
 
   if (!(is.na(view.axis) || view.axis %in% c("x","y","z","X","Y","Z")))
   {
@@ -52,53 +53,40 @@ Spc.Plot <- function (object, view.axis=NA) {
 
   py <- Spc.AsPolylines(object)
 
+  # A wrapper for the call to the points() function
+  # with selection on colour, types of object, etc
+  Spc.points <- function (py, cols) {
+    lty <- "solid"
+    if (is.null(attr(py,"plot.type")) || attr(py,"plot.type") == "object") {
+      col <- "black"
+    } else if (attr(py,"plot.type") == "bound") {
+      if (!print.bounds)
+        return()
+      col <- "blue"
+      lty <- "dotted"
+    } else {
+      col <- "green"
+    }
+    points(py[,cols], type="l", col=col ,lty=lty)
+  }
+
   #Plot x-y
   if (is.na(view.axis) || view.axis %in% c("z","Z")) {
     plot(NA, xlim=xl, ylim=yl, xlab="X", ylab="Y")
-    for (i in 1:length(py)) {
-      lty <- "solid"
-      if (is.null(attr(py[[i]],"plot.type")) || attr(py[[i]],"plot.type") == "object") {
-        col <- "black"
-      } else if (attr(py[[i]],"plot.type") == "bound") {
-        col <- "blue"
-        lty <- "dotted"
-      } else {
-        col <- "green"
-      }
-      points(py[[i]][,c(1,2)], type="l", col=col ,lty=lty)
-    }
+    for (i in 1:length(py)) 
+      Spc.points(py[[i]],c(1,2))
   }
   #Plot x-z
   if (is.na(view.axis) || view.axis %in% c("y","Y")) {
     plot(NA, xlim=xl, ylim=zl, xlab="X", ylab="Z")
-    for (i in 1:length(py)) {
-      lty <- "solid"
-      if (is.null(attr(py[[i]],"plot.type")) || attr(py[[i]],"plot.type") == "object") {
-        col <- "black"
-      } else if (attr(py[[i]],"plot.type") == "bound") {
-        col <- "blue"
-        lty <- "dotted"
-      } else {
-        col <- "green"
-      }
-      points(py[[i]][,c(1,3)], type="l", col=col ,lty=lty)
-    }
+    for (i in 1:length(py)) 
+      Spc.points(py[[i]],c(1,3))
   }
   #Plot z-y
   if (is.na(view.axis) || view.axis %in% c("x","X")) {
     plot(NA, xlim=zl, ylim=yl, xlab="Z", ylab="Y")
-    for (i in 1:length(py)) {
-      lty <- "solid"
-      if (is.null(attr(py[[i]],"plot.type")) || attr(py[[i]],"plot.type") == "object") {
-        col <- "black"
-      } else if (attr(py[[i]],"plot.type") == "bound") {
-        col <- "blue"
-        lty <- "dotted"
-      } else {
-        col <- "green"
-      }
-      points(py[[i]][,c(3,2)], type="l", col=col ,lty=lty)
-    }
+    for (i in 1:length(py)) 
+      Spc.points(py[[i]],c(3,2))
   }
 }  
 

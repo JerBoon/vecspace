@@ -4,13 +4,14 @@
 \alias{Spc.Plot}
 \title{Plot an orthographic plan view along x, y and z axes}
 \usage{
-Spc.Plot(object, view.axis = NA)
+Spc.Plot(object, view.axis = NA, print.bounds = TRUE)
 }
 \arguments{
 \item{object}{The object (elementary or compound) to be plotted}
 
 \item{view.axis}{Set to "X","Y" or "Z" to only plot the view along that axis.
-Otherwise will plot all 3 views together.}
+  Otherwise will plot all 3 views together.
+@param print.bounds Should it display bounding volumes? Default = TRUE}
 }
 \description{
 Plot an orthographic plan view along x, y and z axes
