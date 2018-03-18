@@ -4,12 +4,12 @@
 \alias{Spc.Translate}
 \title{Move the object hierarchy to a different point in space, without performing rotation or any other trsnformation}
 \usage{
-Spc.Translate(move.direction, object)
+Spc.Translate(object, move.direction)
 }
 \arguments{
-\item{move.direction}{A directional vector containing the distance (x,y,z) by which the object should be moved}
-
 \item{object}{The object (elementary or compound) to be moved}
+
+\item{move.direction}{A directional vector containing the distance (x,y,z) by which the object should be moved}
 }
 \value{
 The same object, but with all appropriate spacial points updated accordingly
@@ -18,7 +18,7 @@ The same object, but with all appropriate spacial points updated accordingly
 Move the object hierarchy to a different point in space, without performing rotation or any other trsnformation
 }
 \examples{
-  my_object <- Spc.Translate (c(0,20,0), my_object)
+  my_object <- Spc.Translate (my_object, c(0,20,0))
 }
 \seealso{
 Other transforms: \code{\link{Spc.Rotate}}

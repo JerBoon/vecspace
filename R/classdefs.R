@@ -3,8 +3,8 @@
 #---------------------------------------------------------------------
 #' Move the object hierarchy to a different point in space, without performing rotation or any other trsnformation
 #'
-#' @param move.direction A directional vector containing the distance (x,y,z) by which the object should be moved
 #' @param object The object (elementary or compound) to be moved
+#' @param move.direction A directional vector containing the distance (x,y,z) by which the object should be moved
 #'
 #' @return The same object, but with all appropriate spacial points updated accordingly
 #'
@@ -13,9 +13,9 @@
 #' @family transforms
 #'
 #' @examples
-#'   my_object <- Spc.Translate (c(0,20,0), my_object)
+#'   my_object <- Spc.Translate (my_object, c(0,20,0))
 
-Spc.Translate <- function(move.direction,object) {
+Spc.Translate <- function(object, move.direction) {
   .Spc.Translate(move.direction,object)
 }
 
@@ -34,9 +34,9 @@ Spc.Translate <- function(move.direction,object) {
 #' Rotates about first the x axis, then y, then z. This operation is not commutable (i.e. if you rotate by the various
 #' angles about first z, then x then y, you'd get a different result).
 #'
+#' @param object The object (elementary or compound) to be rotated
 #' @param pivot.point Vector of the point in space to rotate about. Defaults to c(0,0,0)
 #' @param pivot.angle Vector of angles to rotate about (x,y,z) - in degrees
-#' @param object The object (elementary or compound) to be rotated
 #'
 #' @return The same object, but with all appropriate spacial points updated accordingly
 #'
@@ -45,9 +45,9 @@ Spc.Translate <- function(move.direction,object) {
 #' @family transforms
 #'
 #' @examples
-#'   my_object <- Spc.Rotate(c(0,0,0),c(45,0,0),my_object)
+#'   my_object <- Spc.Rotate(my_object,c(0,0,0),c(45,0,0))
 
-Spc.Rotate <- function(pivot.point=c(0,0,0), pivot.angle, object) {
+Spc.Rotate <- function(object, pivot.point=c(0,0,0), pivot.angle) {
 
   #Degrees to radians constant
   pic <- (2 * pi) / 360

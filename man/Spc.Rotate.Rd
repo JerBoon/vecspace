@@ -7,14 +7,14 @@ Uses the right-hand coordinate system (this is the only functin in this package 
 Rotates about first the x axis, then y, then z. This operation is not commutable (i.e. if you rotate by the various
 angles about first z, then x then y, you'd get a different result).}
 \usage{
-Spc.Rotate(pivot.point = c(0, 0, 0), pivot.angle, object)
+Spc.Rotate(object, pivot.point = c(0, 0, 0), pivot.angle)
 }
 \arguments{
+\item{object}{The object (elementary or compound) to be rotated}
+
 \item{pivot.point}{Vector of the point in space to rotate about. Defaults to c(0,0,0)}
 
 \item{pivot.angle}{Vector of angles to rotate about (x,y,z) - in degrees}
-
-\item{object}{The object (elementary or compound) to be rotated}
 }
 \value{
 The same object, but with all appropriate spacial points updated accordingly
@@ -26,7 +26,7 @@ Rotates about first the x axis, then y, then z. This operation is not commutable
 angles about first z, then x then y, you'd get a different result).
 }
 \examples{
-  my_object <- Spc.Rotate(c(0,0,0),c(45,0,0),my_object)
+  my_object <- Spc.Rotate(my_object,c(0,0,0),c(45,0,0))
 }
 \seealso{
 Other transforms: \code{\link{Spc.Translate}}
