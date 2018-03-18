@@ -58,7 +58,7 @@ Spc.Combine <- function (objects, properties=NA, bound=TRUE) {
 
   # -- add a bounding sphere --
 
-  bndRec <- .Spc.BoundRec.SpcCompound (r)
+  bndRec <- .Spc.BoundRec.SpcCompound (r, approx=FALSE)
   spc <- bndRec[[2]] + (bndRec[[1]] - bndRec[[2]]) /2 
   spr <- Utils.VectorLength(bndRec[[1]] - bndRec[[2]]) / 2
  
@@ -90,11 +90,11 @@ Spc.Combine <- function (objects, properties=NA, bound=TRUE) {
 
 #------------------------------------------------------------------------------
 
-.Spc.BoundRec.SpcCompound <- function(objects) {
+.Spc.BoundRec.SpcCompound <- function(objects,approx) {
 
   for (i in 1:length(objects)) {
 
-    r <- .Spc.BoundRec(objects[[i]])
+    r <- .Spc.BoundRec(objects[[i]],approx)
 
     if (is.na(r)[1])
       return (NA)

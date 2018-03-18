@@ -62,13 +62,24 @@ Spc.MakePlane <- function (point, normal, properties=NA) {
 
 #------------------------------------------------------------------------------
 
-.Spc.BoundRec.SpcPlane <- function(plane) {
+.Spc.BoundRec.SpcPlane <- function(plane, approx) {
 
+  if (approx) {
+    #return a little bound around the point value
+    return(list(plane$point - 0.1, plane$point + 0.1))
+  }
+
+  #Otherwise must return null, since an infinite plane cannot be bound
   return(NA)
 }
 
 #==============================================================================
 
 .Spc.Polylines.SpcPlane <- function(plane, flatten=FALSE) {
-  return (list())
+
+  n <- Utils.UnitVector(plane$normal)
+  nm  <- matrix(c(plane$point,plane$point+n), ncol=3, byrow=TRUE)
+  attr(nm,"plot.type") <- "normal"
+
+  return (list(nm))
 }

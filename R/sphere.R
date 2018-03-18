@@ -66,7 +66,7 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
 
 #------------------------------------------------------------------------------
 
-.Spc.BoundRec.SpcSphere <- function(sphere) {
+.Spc.BoundRec.SpcSphere <- function(sphere, approx) {
 
   return(list(sphere$centre+sphere$radius, sphere$centre-sphere$radius))
 }

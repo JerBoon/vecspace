@@ -53,7 +53,7 @@ Spc.Rotate <- function(object, pivot.point=NA, pivot.angle) {
   if (is.na(pivot.point)) {
     if (is.null(object$centre)) {
       #Work it out
-      bndRec <- .Spc.BoundRec(object)
+      bndRec <- .Spc.BoundRec(object, approx=TRUE)
       pivot.point <- bndRec[[2]] + (bndRec[[1]] - bndRec[[2]]) /2 
     } else {
       pivot.point <- object$centre
@@ -120,8 +120,12 @@ Spc.Intersect <- function(ray.origin,ray.direction,object) {
 # returns:
 #  list(c(x,y,z), c(-z,-y-z))
 #  *OR* NA if the object cannot be bound - e.g. for a plane
+# The approx parameter is a flag which tells it whether approximation boundary is OK
+# e.g. an infinity plane cannot have a boundary, but for certain functions (e.g. rotate
+# compound objects, or plotting) it shouldn't totally inhibit the function - in which case
+# that should return a boundary which makes some kind of sense, but isn't overly crucial!
 
-.Spc.BoundRec <- function(obj) {
+.Spc.BoundRec <- function(obj, approx) {
   UseMethod(".Spc.BoundRec", obj)
 }
 

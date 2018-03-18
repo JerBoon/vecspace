@@ -43,7 +43,7 @@ Spc.Plot <- function (object, view.axis=NA, print.bounds=TRUE, print.normals=TRU
   #calculate axes - we want to plot as a cube, so work out the bounding area of the object
   #then expand the shorter edges to make it a cube, kind of thing
 
-  bndRec <- .Spc.BoundRec(object)
+  bndRec <- .Spc.BoundRec(object,approx=TRUE)
 
   centre <- bndRec[[2]] + (bndRec[[1]] - bndRec[[2]]) /2 
   length <- max(bndRec[[1]] - bndRec[[2]])

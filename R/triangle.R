@@ -60,7 +60,7 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
 
 #------------------------------------------------------------------------------
 
-.Spc.BoundRec.SpcTriangle <- function(triangle) {
+.Spc.BoundRec.SpcTriangle <- function(triangle, approx) {
 
   return(list(pmax(triangle$A,triangle$B,triangle$C),
               pmin(triangle$A,triangle$B,triangle$C)))
