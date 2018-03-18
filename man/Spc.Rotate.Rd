@@ -7,12 +7,12 @@ Uses the right-hand coordinate system (this is the only functin in this package 
 Rotates about first the x axis, then y, then z. This operation is not commutable (i.e. if you rotate by the various
 angles about first z, then x then y, you'd get a different result).}
 \usage{
-Spc.Rotate(object, pivot.point = c(0, 0, 0), pivot.angle)
+Spc.Rotate(object, pivot.point = NA, pivot.angle)
 }
 \arguments{
 \item{object}{The object (elementary or compound) to be rotated}
 
-\item{pivot.point}{Vector of the point in space to rotate about. Defaults to c(0,0,0)}
+\item{pivot.point}{Vector of the point in space to rotate about. Defaults to NA, which causes it to pivot about the object's own centre}
 
 \item{pivot.angle}{Vector of angles to rotate about (x,y,z) - in degrees}
 }

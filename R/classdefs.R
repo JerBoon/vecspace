@@ -35,7 +35,7 @@ Spc.Translate <- function(object, move.direction) {
 #' angles about first z, then x then y, you'd get a different result).
 #'
 #' @param object The object (elementary or compound) to be rotated
-#' @param pivot.point Vector of the point in space to rotate about. Defaults to c(0,0,0)
+#' @param pivot.point Vector of the point in space to rotate about. Defaults to NA, which causes it to pivot about the object's own centre
 #' @param pivot.angle Vector of angles to rotate about (x,y,z) - in degrees
 #'
 #' @return The same object, but with all appropriate spacial points updated accordingly
@@ -47,7 +47,18 @@ Spc.Translate <- function(object, move.direction) {
 #' @examples
 #'   my_object <- Spc.Rotate(my_object,c(0,0,0),c(45,0,0))
 
-Spc.Rotate <- function(object, pivot.point=c(0,0,0), pivot.angle) {
+Spc.Rotate <- function(object, pivot.point=NA, pivot.angle) {
+
+  #Work out default pivot point
+  if (is.na(pivot.point)) {
+    if (is.null(object$centre)) {
+      #Work it out
+      bndRec <- .Spc.BoundRec(object)
+      pivot.point <- bndRec[[2]] + (bndRec[[1]] - bndRec[[2]]) /2 
+    } else {
+      pivot.point <- object$centre
+    }
+  }
 
   #Degrees to radians constant
   pic <- (2 * pi) / 360
