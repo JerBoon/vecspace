@@ -6,9 +6,12 @@
 to (x,y,z) coordinates of relevant points. Treats spheres and planes as special cases,
 since these obviously can't be accurately reproduced in wire-frame form}
 \usage{
-Spc.AsPolylines(obj)
+Spc.AsPolylines(obj, flatten = FALSE)
 }
 \arguments{
+\item{flatten}{Simplify the results for better 2D rendering. Think of spheres, which is 2D
+render works better as a circle.}
+
 \item{object}{The object (elementary or compound) to be plotted}
 }
 \value{

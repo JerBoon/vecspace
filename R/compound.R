@@ -112,12 +112,12 @@ Spc.Combine <- function (objects, properties=NA, bound=TRUE) {
 }
 
 
-.Spc.Polylines.SpcCompound <- function(objects) {
+.Spc.Polylines.SpcCompound <- function(objects, flatten=FALSE) {
 
   r <- list()
 
   for (i in 1:length(objects)) {
-    r <- append(r, .Spc.Polylines(objects[[i]]))
+    r <- append(r, .Spc.Polylines(objects[[i]], flatten))
   }
 
   return(r)

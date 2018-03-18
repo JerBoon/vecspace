@@ -131,6 +131,8 @@ Spc.Intersect <- function(ray.origin,ray.direction,object) {
 #' since these obviously can't be accurately reproduced in wire-frame form
 #'
 #' @param object The object (elementary or compound) to be plotted
+#' @param flatten Simplify the results for better 2D rendering. Think of spheres, which is 2D
+#'    render works better as a circle.
 #'
 #' @return List of matrices
 #'
@@ -141,11 +143,11 @@ Spc.Intersect <- function(ray.origin,ray.direction,object) {
 #' @examples
 #'   Spc.AsPolylines (my_world)
 
-Spc.AsPolylines <- function(obj) {
-  .Spc.Polylines(obj)
+Spc.AsPolylines <- function(obj, flatten=FALSE) {
+  .Spc.Polylines(obj, flatten)
 }
 
-.Spc.Polylines <- function(obj) {
+.Spc.Polylines <- function(obj, flatten=FALSE) {
 
   UseMethod(".Spc.Polylines", obj)
 }

@@ -51,7 +51,7 @@ Spc.Plot <- function (object, view.axis=NA, print.bounds=TRUE) {
   yl <- c(centre[2] - length/2, centre[2] + length/2)
   zl <- c(centre[3] - length/2, centre[3] + length/2)
 
-  py <- Spc.AsPolylines(object)
+  py <- Spc.AsPolylines(object, flatten=TRUE)
 
   # A wrapper for the call to the points() function
   # with selection on colour, types of object, etc

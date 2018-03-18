@@ -69,6 +69,6 @@ Spc.MakePlane <- function (point, normal, properties=NA) {
 
 #==============================================================================
 
-.Spc.Polylines.SpcPlane <- function(plane) {
+.Spc.Polylines.SpcPlane <- function(plane, flatten=FALSE) {
   return (list())
 }

@@ -74,7 +74,7 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
 
 #==============================================================================
 
-.Spc.Polylines.SpcSphere <- function(sphere) {
+.Spc.Polylines.SpcSphere <- function(sphere, flatten=FALSE) {
 
   circ <- seq(0,2*pi,length.out=25)
 
@@ -86,8 +86,13 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
   r <- list()
 
   #Add 5 cicles in horizontal space. equator, plus 30deg and 60deg tropics
+  #or if flattening, just the equation
+  if (flatten)
+    trop <- 0
+  else
+    trop <- seq(-pi/3,pi/3,length.out=5)
 
-  for (y in seq(-pi/3,pi/3,length.out=5)) {
+  for (y in trop) {
     hc <- matrix(c(sin(circ) * sphere$radius * cos(y) + sphere$centre[1],
                    0*circ + sphere$centre[2] + sin(y) * sphere$radius,
                    cos(circ) * sphere$radius * cos(y) + sphere$centre[3]),
@@ -101,9 +106,14 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
   }
 
   #And now another bunch of longitude circles
+  #or just the 2 if flattening
 
-  for (l in seq(0, 5*2*pi/12, length.out=6))
-  {
+  if (flatten)
+    circs <- seq(0,pi/2, length.out=2)
+  else
+    circs <- seq(0, 5*2*pi/12, length.out=6)
+
+  for (l in circs) {
     hc <- matrix(c(sin(l) * cos(circ) * sphere$radius + sphere$centre[1],
                    sphere$centre[2] + sin(circ) * sphere$radius,
                    cos(l) * cos(circ) * sphere$radius + sphere$centre[3]),
@@ -118,7 +128,7 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
 
   #if sphere is a bounding sphere, also add its contents
   if (bounding) {
-    r <- append(r, .Spc.Polylines(sphere$objects))
+    r <- append(r, .Spc.Polylines(sphere$objects, flatten))
     attr(r,"plot.type") <- "bound"
   } else {
     attr(r,"plot.type") <- "object"
