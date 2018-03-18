@@ -52,7 +52,7 @@
   if (d > 0) {
     t1 <- (-b - sqrt(d)) / (2 * a)
     t2 <- (-b + sqrt(d)) / (2 * a)
-    if (t1 < t2) {
+    if (t1 < t2 && t1 > 0) {
       t <- t1
     } else {
       t <- t2
