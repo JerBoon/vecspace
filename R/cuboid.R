@@ -90,7 +90,7 @@ Spc.MakeCuboid <- function (centre, dimensions, properties=NA, bound=TRUE) {
 
   ff <- list(f1,f2,f3,f4,f5,f6)
 
-  r <- Spc.CombineObjects(list(f1,f2,f3,f4,f5,f6), properties=properties, bound=bound)
+  r <- Spc.Combine(list(f1,f2,f3,f4,f5,f6), properties=properties, bound=bound)
 
   r <- .Spc.Translate(centre, r)
 

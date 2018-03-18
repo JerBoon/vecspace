@@ -27,7 +27,7 @@ Return an elementary plane object
   pl <- Spc.MakePlane(c(0,0,0), c(0,1,0), "Dave")
 }
 \seealso{
-Other constructors: \code{\link{Spc.CombineObjects}},
+Other constructors: \code{\link{Spc.Combine}},
   \code{\link{Spc.MakeCuboid}},
   \code{\link{Spc.MakeSphere}},
   \code{\link{Spc.MakeTriangle}}

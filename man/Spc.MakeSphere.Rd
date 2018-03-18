@@ -24,7 +24,7 @@ Return an elementary sphere object
   s <- Spc.MakeSphere(c(0,0,0), 2, surface_props)
 }
 \seealso{
-Other constructors: \code{\link{Spc.CombineObjects}},
+Other constructors: \code{\link{Spc.Combine}},
   \code{\link{Spc.MakeCuboid}},
   \code{\link{Spc.MakePlane}},
   \code{\link{Spc.MakeTriangle}}

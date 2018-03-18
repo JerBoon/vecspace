@@ -23,23 +23,23 @@
 #' @family constructors
 #'
 #' @examples
-#'   world <- Spc.CombineObjects(list(my_table, my_chairs), "dining area", TRUE)
+#'   world <- Spc.Combine(list(my_table, my_chairs), "dining area", TRUE)
 
-Spc.CombineObjects <- function (objects, properties=NA, bound=TRUE) {
+Spc.Combine <- function (objects, properties=NA, bound=TRUE) {
 
   if (class(objects) != "list" || length(objects) < 2) {
-    print ("Spc.CombineObjects : objects should be a simple list of 2 or more spatial objects")
+    print ("Spc.Combine : objects should be a simple list of 2 or more spatial objects")
     return(NA)
   }
   for (i in 1:length(objects)) {
     if (!sum(class(objects[[i]]) %in% c("SpcTriangle","SpcPlane","SpcSphere","SpcCompound"))) {
-      print ("Spc.CombineObjects : objects should be a list of recognised spatial objects")
+      print ("Spc.Combine : objects should be a list of recognised spatial objects")
       return(NA)
     }
     
     if (sum(class(objects[[i]]) == "SpcPlane") && bound)
     {
-      print ("Spc.CombineObjects : can't add bounding sphere to objects including a plane")
+      print ("Spc.Combine : can't add bounding sphere to objects including a plane")
       return(NA)
     }
   }
