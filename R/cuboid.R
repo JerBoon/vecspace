@@ -44,21 +44,21 @@ Spc.MakeCuboid <- function (centre, dimensions, properties=NA, bound=TRUE) {
                                  c(d[1],-d[2],d[3]),
                                  c(d[1],-d[2],-d[3])),
              Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(d[1],d[2],-d[3]),
-                                 c(d[1],-d[2],-d[3])))
+                                 c(d[1],-d[2],-d[3]),
+                                 c(d[1],d[2],-d[3])))
   class(f1) <- append(class(f1),"SpcCompound")
 
   f2 <- list(Spc.MakeTriangle(c(-d[1],d[2],d[3]),
-                                 c(-d[1],-d[2],d[3]),
-                                 c(-d[1],-d[2],-d[3])),
+                                 c(-d[1],-d[2],-d[3]),
+                                 c(-d[1],-d[2],d[3])),
              Spc.MakeTriangle(c(-d[1],d[2],d[3]),
                                  c(-d[1],d[2],-d[3]),
                                  c(-d[1],-d[2],-d[3])))
   class(f2) <- append(class(f2),"SpcCompound")
 
   f3 <- list(Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(-d[1],d[2],d[3]),
-                                 c(-d[1],d[2],-d[3])),
+                                 c(-d[1],d[2],-d[3]),
+                                 c(-d[1],d[2],d[3])),
              Spc.MakeTriangle(c(d[1],d[2],d[3]),
                                  c(d[1],d[2],-d[3]),
                                  c(-d[1],d[2],-d[3])))
@@ -68,13 +68,13 @@ Spc.MakeCuboid <- function (centre, dimensions, properties=NA, bound=TRUE) {
                                  c(-d[1],-d[2],d[3]),
                                  c(-d[1],-d[2],-d[3])),
              Spc.MakeTriangle(c(d[1],-d[2],d[3]),
-                                 c(d[1],-d[2],-d[3]),
-                                 c(-d[1],-d[2],-d[3])))
+                                 c(-d[1],-d[2],-d[3]),
+                                 c(d[1],-d[2],-d[3])))
   class(f4) <- append(class(f4),"SpcCompound")
 
   f5 <- list(Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(d[1],-d[2],d[3]),
-                                 c(-d[1],-d[2],d[3])),
+                                 c(-d[1],-d[2],d[3]),
+                                 c(d[1],-d[2],d[3])),
              Spc.MakeTriangle(c(d[1],d[2],d[3]),
                                  c(-d[1],d[2],d[3]),
                                  c(-d[1],-d[2],d[3])))
@@ -84,8 +84,8 @@ Spc.MakeCuboid <- function (centre, dimensions, properties=NA, bound=TRUE) {
                                  c(d[1],-d[2],-d[3]),
                                  c(-d[1],-d[2],-d[3])),
              Spc.MakeTriangle(c(d[1],d[2],-d[3]),
-                                 c(-d[1],d[2],-d[3]),
-                                 c(-d[1],-d[2],-d[3])))
+                                 c(-d[1],-d[2],-d[3]),
+                                 c(-d[1],d[2],-d[3])))
   class(f6) <- append(class(f6),"SpcCompound")
 
   ff <- list(f1,f2,f3,f4,f5,f6)
