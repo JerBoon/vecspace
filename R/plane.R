@@ -44,7 +44,7 @@ Spc.MakePlane <- function (point, normal, properties=NA) {
 
 #==============================================================================
 
-.Spc.Translate.SpcPlane <- function(vector, plane) {
+.Spc.Translate.SpcPlane <- function(plane, vector) {
 
   plane$point <- plane$point + vector
 
@@ -52,7 +52,7 @@ Spc.MakePlane <- function (point, normal, properties=NA) {
 }
 
 #------------------------------------------------------------------------------
-.Spc.Rotate.SpcPlane <- function(pivot.point, pivot.rotMatrix, plane) {
+.Spc.Rotate.SpcPlane <- function(plane, pivot.point, pivot.rotMatrix) {
 
   plane$point <- (pivot.rotMatrix %*% (plane$point - pivot.point)) + pivot.point
   plane$normal <- pivot.rotMatrix %*% plane$normal

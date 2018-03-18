@@ -39,7 +39,7 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
 
 #------------------------------------------------------------------------------
 
-.Spc.Translate.SpcTriangle <- function(vector, triangle) {
+.Spc.Translate.SpcTriangle <- function(triangle, vector) {
 
   triangle$A <- triangle$A + vector
   triangle$B <- triangle$B + vector
@@ -49,7 +49,7 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
 }
 
 #------------------------------------------------------------------------------
-.Spc.Rotate.SpcTriangle <- function(pivot.point, pivot.rotMatrix, triangle) {
+.Spc.Rotate.SpcTriangle <- function(triangle, pivot.point, pivot.rotMatrix) {
 
   triangle$A <- (pivot.rotMatrix %*% (triangle$A - pivot.point)) + pivot.point
   triangle$B <- (pivot.rotMatrix %*% (triangle$B - pivot.point)) + pivot.point

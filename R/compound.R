@@ -70,20 +70,20 @@ Spc.Combine <- function (objects, properties=NA, bound=TRUE) {
 
 #------------------------------------------------------------------------
 
-.Spc.Translate.SpcCompound <- function(move.direction, objects) {
+.Spc.Translate.SpcCompound <- function(objects, move.direction) {
 
   for (i in 1:length(objects)) {
-    objects[[i]] <- .Spc.Translate(move.direction, objects[[i]])
+    objects[[i]] <- .Spc.Translate(objects[[i]], move.direction)
   }
   return (objects)
 }
 
 #------------------------------------------------------------------------
 
-.Spc.Rotate.SpcCompound <- function(pivot.point,pivot.rotMatrix, objects) {
+.Spc.Rotate.SpcCompound <- function(objects, pivot.point,pivot.rotMatrix) {
 
   for (i in 1:length(objects)) {
-    objects[[i]] <- .Spc.Rotate(pivot.point,pivot.rotMatrix, objects[[i]])
+    objects[[i]] <- .Spc.Rotate(objects[[i]], pivot.point,pivot.rotMatrix)
   }
   return (objects)
 }

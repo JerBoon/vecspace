@@ -16,14 +16,14 @@
 #'   my_object <- Spc.Translate (my_object, c(0,20,0))
 
 Spc.Translate <- function(object, move.direction) {
-  .Spc.Translate(move.direction,object)
+  .Spc.Translate(object, move.direction)
 }
 
 # ------- And the corresponding class function definition
 # Declared as separate function, since the elementary classes want to be hiiden, and roxygen
 # if I understand correctly requires a separate definition (??)
 
-.Spc.Translate <- function(move.direction,object) {
+.Spc.Translate <- function(object, move.direction) {
   UseMethod(".Spc.Translate", object)
 }
 
@@ -64,14 +64,14 @@ Spc.Rotate <- function(object, pivot.point=c(0,0,0), pivot.angle) {
   # rotMatrix down through the various transform methods.. 
   rot <- rotz %*% roty %*% rotx
 
-  .Spc.Rotate(pivot.point, rot, object)
+  .Spc.Rotate(object, pivot.point, rot)
 }
 
 # ------- And the corresponding class function definition
 # Declared as separate function, since the elementary classes want to be hiiden, and roxygen
 # if I understand correctly requires a separate definition (??)
 
-.Spc.Rotate <- function(pivot.point, pivot.rotMatrix, object) {
+.Spc.Rotate <- function(object, pivot.point, pivot.rotMatrix) {
   UseMethod(".Spc.Rotate", object)
 }
 

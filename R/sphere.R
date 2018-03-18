@@ -41,26 +41,26 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
 
 #------------------------------------------------------------------------------
 
-.Spc.Translate.SpcSphere <- function(vector, sphere) {
+.Spc.Translate.SpcSphere <- function(sphere, vector) {
 
   sphere$centre <- sphere$centre + vector
 
   if (length(sphere$objects) == 0)
     return(sphere)
 
-  sphere$objects <- .Spc.Translate(vector,sphere$objects)
+  sphere$objects <- .Spc.Translate(sphere$objects, vector)
   return(sphere)
 }
 
 #------------------------------------------------------------------------------
-.Spc.Rotate.SpcSphere <- function(pivot.point, pivot.rotMatrix, sphere) {
+.Spc.Rotate.SpcSphere <- function(sphere, pivot.point, pivot.rotMatrix) {
 
   sphere$centre <- (pivot.rotMatrix %*% (sphere$centre - pivot.point)) + pivot.point
 
   if (length(sphere$objects) == 0)
     return(sphere)
 
-  sphere$objects <- .Spc.Rotate(pivot.point, pivot.rotMatrix, sphere$objects)
+  sphere$objects <- .Spc.Rotate(sphere$objects, pivot.point, pivot.rotMatrix)
   return(sphere)
 }
 
