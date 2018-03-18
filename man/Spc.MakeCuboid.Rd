@@ -4,7 +4,7 @@
 \alias{Spc.MakeCuboid}
 \title{Return a cuboid object, constructed from elementary spacial objects}
 \usage{
-Spc.MakeCuboid(centre, dimensions, properties = NA)
+Spc.MakeCuboid(centre, dimensions, properties = NA, bound = TRUE)
 }
 \arguments{
 \item{centre}{Centre of cuboid}

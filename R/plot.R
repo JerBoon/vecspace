@@ -3,6 +3,8 @@
 #' Plot an orthographic plan view along x, y and z axes
 #'
 #' @param object The object (elementary or compound) to be plotted
+#' @param view.axis Set to "X","Y" or "Z" to only plot the view along that axis.
+#'    Otherwise will plot all 3 views together.
 #'
 #' @export
 #'
@@ -12,10 +14,22 @@
 #'   Spc.Plot (my_world)
 
 
-Spc.Plot <- function (object) {
+Spc.Plot <- function (object, view.axis=NA) {
 
-  #Set up a 2x2 plot region
-  par(mfcol=c(2,2))
+  if (!(is.na(view.axis) || view.axis %in% c("x","y","z","X","Y","Z")))
+  {
+    print("Spc.Plot: view.axis can be either x,y or z online.")
+    return()
+  }
+
+  #Set up a 2x2 plot region?
+  if (is.na(view.axis)) {
+    par(mfcol=c(2,2))
+  } else {
+    par(mfcol=c(1,1))
+  }
+
+  #display formats
   par(mai=c(0.5,0.5,0.1,0.1))
   par(mai=c(1,1,1,1))
   par(mar=c(1,1,1,1))
@@ -39,15 +53,20 @@ Spc.Plot <- function (object) {
   py <- Spc.AsPolylines(object)
 
   #Plot x-y
-  plot(NA, xlim=xl, ylim=yl, xlab="X", ylab="Y")
-  for (i in 1:length(py)) points(py[[i]][,c(1,2)], type="l")
+  if (is.na(view.axis) || view.axis %in% c("z","Z")) {
+    plot(NA, xlim=xl, ylim=yl, xlab="X", ylab="Y")
+    for (i in 1:length(py)) points(py[[i]][,c(1,2)], type="l")
+  }
   #Plot x-z
-  plot(NA, xlim=xl, ylim=zl, xlab="X", ylab="Z")
-  for (i in 1:length(py)) points(py[[i]][,c(1,3)], type="l")
+  if (is.na(view.axis) || view.axis %in% c("y","Y")) {
+    plot(NA, xlim=xl, ylim=zl, xlab="X", ylab="Z")
+    for (i in 1:length(py)) points(py[[i]][,c(1,3)], type="l")
+  }
   #Plot z-y
-  plot(NA, xlim=zl, ylim=yl, xlab="Z", ylab="Y")
-  for (i in 1:length(py)) points(py[[i]][,c(3,2)], type="l")
+  if (is.na(view.axis) || view.axis %in% c("x","X")) {
+    plot(NA, xlim=zl, ylim=yl, xlab="Z", ylab="Y")
+    for (i in 1:length(py)) points(py[[i]][,c(3,2)], type="l")
+  }
 }  
-
 
 
