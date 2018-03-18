@@ -26,7 +26,7 @@
 #' @examples
 #'   w <- Spc.MakeCuboid(c(0,0,0), c(2,2,2), surface_props)
 
-Spc.MakeCuboid <- function (centre, dimensions, properties=NA) {
+Spc.MakeCuboid <- function (centre, dimensions, properties=NA, bound=TRUE) {
 
   if ((typeof(centre) != "double") || (length(centre) != 3)) {
     print("Spc.MakeCuboid: centre should be a 3 number vector")
@@ -90,7 +90,7 @@ Spc.MakeCuboid <- function (centre, dimensions, properties=NA) {
 
   ff <- list(f1,f2,f3,f4,f5,f6)
 
-  r <- Spc.CombineObjects(list(f1,f2,f3,f4,f5,f6), properties, TRUE)
+  r <- Spc.CombineObjects(list(f1,f2,f3,f4,f5,f6), properties=properties, bound=bound)
 
   r <- .Spc.Translate(centre, r)
 
