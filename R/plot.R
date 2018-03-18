@@ -6,6 +6,7 @@
 #' @param view.axis Set to "X","Y" or "Z" to only plot the view along that axis.
 #'    Otherwise will plot all 3 views together.
 #'  @param print.bounds Should it display bounding volumes? Default = TRUE
+#'  @param print.normals Should it display normal vectors (where applicable)
 #'
 #' @export
 #'
@@ -15,7 +16,7 @@
 #'   Spc.Plot (my_world)
 
 
-Spc.Plot <- function (object, view.axis=NA, print.bounds=TRUE) {
+Spc.Plot <- function (object, view.axis=NA, print.bounds=TRUE, print.normals=TRUE) {
 
   if (!(is.na(view.axis) || view.axis %in% c("x","y","z","X","Y","Z")))
   {
@@ -64,10 +65,21 @@ Spc.Plot <- function (object, view.axis=NA, print.bounds=TRUE) {
         return()
       col <- "blue"
       lty <- "dotted"
-    } else {
+    } else if (attr(py,"plot.type") == "normal") {
+      if (!print.normals)
+        return()
       col <- "green"
+      #scale the normal vector to the plot size.
+      py[2,] <- (py[2,] - py[1,]) * (length/20) + py[1,]
+    } else {
+      #something else??
+      col <- "red"
     }
     points(py[,cols], type="l", col=col ,lty=lty)
+
+    if (is.null(attr(py,"plot.type")) || attr(py,"plot.type") == "normal") {
+      points(py[1,cols[1]],py[1,cols[2]], type="p", col=col, pch=16)
+    }
   }
 
   #Plot x-y

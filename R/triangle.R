@@ -70,9 +70,17 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
 
 .Spc.Polylines.SpcTriangle <- function(triangle, flatten=FALSE) {
 
+  # The triangle itself
   r = matrix(c(triangle$A,triangle$B,triangle$C,triangle$A),ncol=3,byrow=TRUE)
   attr(r,"plot.type") <- "object"
-  return (list(r))
+
+  #The normal; tc = triangle centre; n = normal
+  tc <- (triangle$A + triangle$B + triangle$C) /3
+  n <- Utils.UnitVector(Utils.CrossProduct(triangle$B - triangle$A, triangle$C - triangle$A))
+  nm  <- matrix(c(tc,tc+n), ncol=3, byrow=TRUE)
+  attr(nm,"plot.type") <- "normal"
+
+  return (list(r,nm))
 }
 
 
