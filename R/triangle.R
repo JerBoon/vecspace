@@ -71,6 +71,7 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
 .Spc.Polylines.SpcTriangle <- function(triangle) {
 
   r = matrix(c(triangle$A,triangle$B,triangle$C,triangle$A),ncol=3,byrow=TRUE)
+  attr(r,"plot.type") <- "object"
   return (list(r))
 }
 

@@ -55,17 +55,50 @@ Spc.Plot <- function (object, view.axis=NA) {
   #Plot x-y
   if (is.na(view.axis) || view.axis %in% c("z","Z")) {
     plot(NA, xlim=xl, ylim=yl, xlab="X", ylab="Y")
-    for (i in 1:length(py)) points(py[[i]][,c(1,2)], type="l")
+    for (i in 1:length(py)) {
+      lty <- "solid"
+      if (is.null(attr(py[[i]],"plot.type")) || attr(py[[i]],"plot.type") == "object") {
+        col <- "black"
+      } else if (attr(py[[i]],"plot.type") == "bound") {
+        col <- "blue"
+        lty <- "dotted"
+      } else {
+        col <- "green"
+      }
+      points(py[[i]][,c(1,2)], type="l", col=col ,lty=lty)
+    }
   }
   #Plot x-z
   if (is.na(view.axis) || view.axis %in% c("y","Y")) {
     plot(NA, xlim=xl, ylim=zl, xlab="X", ylab="Z")
-    for (i in 1:length(py)) points(py[[i]][,c(1,3)], type="l")
+    for (i in 1:length(py)) {
+      lty <- "solid"
+      if (is.null(attr(py[[i]],"plot.type")) || attr(py[[i]],"plot.type") == "object") {
+        col <- "black"
+      } else if (attr(py[[i]],"plot.type") == "bound") {
+        col <- "blue"
+        lty <- "dotted"
+      } else {
+        col <- "green"
+      }
+      points(py[[i]][,c(1,3)], type="l", col=col ,lty=lty)
+    }
   }
   #Plot z-y
   if (is.na(view.axis) || view.axis %in% c("x","X")) {
     plot(NA, xlim=zl, ylim=yl, xlab="Z", ylab="Y")
-    for (i in 1:length(py)) points(py[[i]][,c(3,2)], type="l")
+    for (i in 1:length(py)) {
+      lty <- "solid"
+      if (is.null(attr(py[[i]],"plot.type")) || attr(py[[i]],"plot.type") == "object") {
+        col <- "black"
+      } else if (attr(py[[i]],"plot.type") == "bound") {
+        col <- "blue"
+        lty <- "dotted"
+      } else {
+        col <- "green"
+      }
+      points(py[[i]][,c(3,2)], type="l", col=col ,lty=lty)
+    }
   }
 }  
 

@@ -78,6 +78,9 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
 
   circ <- seq(0,2*pi,length.out=25)
 
+  #is it a bounding sphere?
+  bounding <- (length(sphere$objects) > 0)
+
   #a list of polylines for all the different cicrles making up the line drawn circle
   #think "Panorama"...
   r <- list()
@@ -89,6 +92,11 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
                    0*circ + sphere$centre[2] + sin(y) * sphere$radius,
                    cos(circ) * sphere$radius * cos(y) + sphere$centre[3]),
                  ncol=3)
+    if (bounding) {
+      attr(hc,"plot.type") <- "bound"
+    } else {
+      attr(hc,"plot.type") <- "object"
+    }
     r <- append(r, list(hc))
   }
 
@@ -100,12 +108,21 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
                    sphere$centre[2] + sin(circ) * sphere$radius,
                    cos(l) * cos(circ) * sphere$radius + sphere$centre[3]),
                  ncol=3)
+    if (bounding) {
+      attr(hc,"plot.type") <- "bound"
+    } else {
+      attr(hc,"plot.type") <- "object"
+    }
     r <- append(r, list(hc))
   }
 
   #if sphere is a bounding sphere, also add its contents
-  if (length(sphere$objects) > 0)
+  if (bounding) {
     r <- append(r, .Spc.Polylines(sphere$objects))
+    attr(r,"plot.type") <- "bound"
+  } else {
+    attr(r,"plot.type") <- "object"
+  }
 
   return(r)
 }
