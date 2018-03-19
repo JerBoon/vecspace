@@ -40,57 +40,33 @@ Spc.MakeCuboid <- function (centre, dimensions, properties=NA, bound=TRUE) {
 
   d <- dimensions / 2
 
-  f1 <- list(Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(d[1],-d[2],d[3]),
-                                 c(d[1],-d[2],-d[3])),
-             Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(d[1],-d[2],-d[3]),
-                                 c(d[1],d[2],-d[3])))
-  class(f1) <- append(class(f1),"SpcCompound")
+  f1 <- Spc.MakePolygon(c(d[1],d[1],d[1],d[1]),
+                        c(d[2],-d[2],-d[2],d[2]),
+                        c(d[3],d[3],-d[3],-d[3]))
 
-  f2 <- list(Spc.MakeTriangle(c(-d[1],d[2],d[3]),
-                                 c(-d[1],-d[2],-d[3]),
-                                 c(-d[1],-d[2],d[3])),
-             Spc.MakeTriangle(c(-d[1],d[2],d[3]),
-                                 c(-d[1],d[2],-d[3]),
-                                 c(-d[1],-d[2],-d[3])))
-  class(f2) <- append(class(f2),"SpcCompound")
+  f2 <- Spc.MakePolygon(c(-d[1],-d[1],-d[1],-d[1]),
+                        c(d[2],d[2],-d[2],-d[2]),
+                        c(d[3],-d[3],-d[3],d[3]))
 
-  f3 <- list(Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(-d[1],d[2],-d[3]),
-                                 c(-d[1],d[2],d[3])),
-             Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(d[1],d[2],-d[3]),
-                                 c(-d[1],d[2],-d[3])))
-  class(f3) <- append(class(f3),"SpcCompound")
+  f3 <- Spc.MakePolygon(c(d[1],d[1],-d[1],-d[1]),
+                        c(d[2],d[2],d[2],d[2]),
+                        c(d[3],-d[3],-d[3],d[3]))
 
-  f4 <- list(Spc.MakeTriangle(c(d[1],-d[2],d[3]),
-                                 c(-d[1],-d[2],d[3]),
-                                 c(-d[1],-d[2],-d[3])),
-             Spc.MakeTriangle(c(d[1],-d[2],d[3]),
-                                 c(-d[1],-d[2],-d[3]),
-                                 c(d[1],-d[2],-d[3])))
-  class(f4) <- append(class(f4),"SpcCompound")
+  f4 <- Spc.MakePolygon(c(d[1],-d[1],-d[1],d[1]),
+                        c(-d[2],-d[2],-d[2],-d[2]),
+                        c(d[3],d[3],-d[3],-d[3]))
 
-  f5 <- list(Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(-d[1],-d[2],d[3]),
-                                 c(d[1],-d[2],d[3])),
-             Spc.MakeTriangle(c(d[1],d[2],d[3]),
-                                 c(-d[1],d[2],d[3]),
-                                 c(-d[1],-d[2],d[3])))
-  class(f5) <- append(class(f5),"SpcCompound")
+  f5 <- Spc.MakePolygon(c(d[1],-d[1],-d[1],d[1]),
+                        c(d[2],d[2],-d[2],-d[2]),
+                        c(d[3],d[3],d[3],d[3]))
 
-  f6 <- list(Spc.MakeTriangle(c(d[1],d[2],-d[3]),
-                                 c(d[1],-d[2],-d[3]),
-                                 c(-d[1],-d[2],-d[3])),
-             Spc.MakeTriangle(c(d[1],d[2],-d[3]),
-                                 c(-d[1],-d[2],-d[3]),
-                                 c(-d[1],d[2],-d[3])))
-  class(f6) <- append(class(f6),"SpcCompound")
+  f6 <- Spc.MakePolygon(c(d[1],d[1],-d[1],-d[1]),
+                        c(d[2],-d[2],-d[2],d[2]),
+                        c(-d[3],-d[3],-d[3],-d[3]))
 
   ff <- list(f1,f2,f3,f4,f5,f6)
 
-  r <- Spc.Combine(list(f1,f2,f3,f4,f5,f6), properties=properties, bound=bound)
+  r <- Spc.Combine(ff, properties=properties, bound=bound)
 
   r <- .Spc.Translate(r, centre)
 

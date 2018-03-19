@@ -29,6 +29,7 @@ Return an elementary plane object
 \seealso{
 Other constructors: \code{\link{Spc.Combine}},
   \code{\link{Spc.MakeCuboid}},
+  \code{\link{Spc.MakePolygon}},
   \code{\link{Spc.MakeSphere}},
   \code{\link{Spc.MakeTriangle}}
 }

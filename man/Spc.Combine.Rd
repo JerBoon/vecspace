@@ -28,6 +28,7 @@ Return an object from a list of other objects
 \seealso{
 Other constructors: \code{\link{Spc.MakeCuboid}},
   \code{\link{Spc.MakePlane}},
+  \code{\link{Spc.MakePolygon}},
   \code{\link{Spc.MakeSphere}},
   \code{\link{Spc.MakeTriangle}}
 }

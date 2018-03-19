@@ -27,5 +27,6 @@ Return an elementary sphere object
 Other constructors: \code{\link{Spc.Combine}},
   \code{\link{Spc.MakeCuboid}},
   \code{\link{Spc.MakePlane}},
+  \code{\link{Spc.MakePolygon}},
   \code{\link{Spc.MakeTriangle}}
 }

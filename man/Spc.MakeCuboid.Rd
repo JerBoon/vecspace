@@ -28,6 +28,7 @@ Return a cuboid object, constructed from elementary spacial objects
 \seealso{
 Other constructors: \code{\link{Spc.Combine}},
   \code{\link{Spc.MakePlane}},
+  \code{\link{Spc.MakePolygon}},
   \code{\link{Spc.MakeSphere}},
   \code{\link{Spc.MakeTriangle}}
 }
