@@ -45,6 +45,7 @@ Spc.MakePolygon <- function (x,y,z, properties=NA) {
     r <- append(r,list(t))
   }
 
+  class(r) = append(class(r),"SpcPolygon")
   class(r) = append(class(r),"SpcCompound")
 
   if (!is.na(properties))
@@ -53,3 +54,17 @@ Spc.MakePolygon <- function (x,y,z, properties=NA) {
   return(r)
 } 
 
+.Spc.Polylines.SpcPolygon <- function(objects, flatten=FALSE) {
+
+  #a sub-class of SpcCompound
+  r <- list()
+
+  g <- length(objects)
+  for (i in 1:length(objects)) {
+    if (i == 1) r <- append(r, .Spc.Polylines.SpcTriangle(objects[[i]], flatten, verts="ABC"))
+    else if (i == g) r <- append(r, .Spc.Polylines.SpcTriangle(objects[[i]], flatten, verts="BCA"))
+    else r <- append(r, .Spc.Polylines.SpcTriangle(objects[[i]], flatten, verts="BC"))
+  }
+
+  return(r)
+}

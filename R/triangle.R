@@ -67,12 +67,24 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
 }
 
 #==============================================================================
+# verts defines which sides to return in the list - by default will draw a>B>C>D
+# which is the whole triangle. Otherwise can be overridden as needed
 
-.Spc.Polylines.SpcTriangle <- function(triangle, flatten=FALSE) {
+.Spc.Polylines.SpcTriangle <- function(triangle, flatten=FALSE, verts="ABCA") {
 
   # The triangle itself
   r = matrix(c(triangle$A,triangle$B,triangle$C,triangle$A),ncol=3,byrow=TRUE)
   attr(r,"plot.type") <- "object"
+
+  r <- numeric(0)
+  for (a in strsplit(verts,"")[[1]])  {
+    if (a == "A") r <- append(r, triangle$A)
+    else if (a == "B") r <- append(r, triangle$B)
+    else if (a == "C") r <- append(r, triangle$C)
+  }
+  r <- matrix(r,ncol=3,byrow=TRUE)
+  attr(r,"plot.type") <- "object"
+    
 
   #The normal; tc = triangle centre; n = normal
   tc <- (triangle$A + triangle$B + triangle$C) /3
