@@ -1,6 +1,8 @@
 # vecspace
 A library of generic Euclidean functions in 3D space
 
+![orthogonal thingybob](https://user-images.githubusercontent.com/23141865/37862927-18a88094-2f4d-11e8-862d-db58431ddb49.png)
+
 This is a work-in-progess at the moment. It's essentially part of my R "hello world" program, so be gentle with me!
 
 I'm learning to build data structures and packages in R. To do this, I'm chucking a slightly ridiculous project
