@@ -51,5 +51,7 @@ Also, transformation methods (OOP, remember) can be build for each elementary an
 (e.g.) "rotate my cube" and it'll run through the hierarchy of objects and rotate them all in the same geometry by parsing
 the object hierarchy.
 
-Further general constructors will allow you to, say, build a table (use your imagination) from 5 simple cuboid objects, and then
+Further general constructors will allow you to, say, build a table from 5 simple cuboid objects, and then
 be able to simply say "rotate my table" in a single statement. (And or course, the table itself can have a bounding sphere container)
+
+![table](https://user-images.githubusercontent.com/23141865/37863006-9b27cef2-2f4e-11e8-89f9-a4203fde7501.png)
