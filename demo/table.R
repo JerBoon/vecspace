@@ -49,4 +49,4 @@ Spc.Plot(Spc.Rotate(lots.of.tabs,pivot.angle=c(-20,10,0)),print.normals=FALSE)
 # We can REALLY reuse it!
 
 lots.of.tabs <- Spc.Combine(list(lots.of.tabs,Spc.Translate(lots.of.tabs,c(40,0,0)),Spc.Translate(lots.of.tabs,c(0,0,40)),Spc.Translate(lots.of.tabs,c(40,0,40))),bound=FALSE)
-Spc.Plot(Spc.Rotate(lots.of.tabs,pivot.angle=c(-20,10,0)),print.normals=FALSE)
+Spc.Plot(Spc.Rotate(lots.of.tabs,pivot.angle=c(-20,10,0)),print.normals=FALSE,view.axis="z")
