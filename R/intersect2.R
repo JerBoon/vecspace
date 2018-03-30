@@ -26,6 +26,7 @@
   if (class(int) == "logical")
     return(NA)
 
+  #Properties can be defined hierarchically for compound objects
   if (is.null(int$properties) || is.na(int$properties)) {
     int$properties <- attr(objects,"properties")
   }

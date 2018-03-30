@@ -16,7 +16,7 @@
 #'   Spc.Plot (my_world)
 
 
-Spc.Plot <- function (object, view.axis=NA, print.bounds=TRUE, print.normals=TRUE) {
+Spc.Plot <- function (object, view.axis=NA, print.bounds=TRUE, print.normals=FALSE) {
 
   if (!(is.na(view.axis) || view.axis %in% c("x","y","z","X","Y","Z")))
   {
