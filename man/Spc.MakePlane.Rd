@@ -4,7 +4,8 @@
 \alias{Spc.MakePlane}
 \title{Return an elementary plane object}
 \usage{
-Spc.MakePlane(point, normal, properties = NA)
+Spc.MakePlane(point, normal, properties = NA, direction.north = NA,
+  direction.east = NA)
 }
 \arguments{
 \item{point}{A point on the plane}
@@ -15,10 +16,7 @@ Spc.MakePlane(point, normal, properties = NA)
 Default NA}
 }
 \value{
-Elementary plane object. The function neither checks that the 
-  3 input points are not colinear, nor that any of the 3 points are equal.
-  Expect odd-ish results in either of those cases, since the resulting
-  object will we either a line or a point with zero area.
+Elementary plane object.
 }
 \description{
 Return an elementary plane object

@@ -6,11 +6,12 @@
 #' @param normal A vector which is normal to the direction of the plane
 #' @param properties Package-independent object defining additional plane properties.
 #'     Default NA
+#' @direction.north,direction.east Nominal north and east directional vectors along the plane.
+#'     If supplied, an intersect will also calculate and return components $north and $east, as the
+#'     amount of direction of north and east the intersect is from the plane centre point.
+#'     Alse, where supplied, none of north, east or normal should be parallel.
 #'
-#' @return Elementary plane object. The function neither checks that the 
-#'   3 input points are not colinear, nor that any of the 3 points are equal.
-#'   Expect odd-ish results in either of those cases, since the resulting
-#'   object will we either a line or a point with zero area.
+#' @return Elementary plane object.
 #' 
 #' @export
 #'
@@ -19,8 +20,9 @@
 #' @examples
 #'   pl <- Spc.MakePlane(c(0,0,0), c(0,1,0), "Dave")
 
-Spc.MakePlane <- function (point, normal, properties=NA) {
+Spc.MakePlane <- function (point, normal, properties=NA, direction.north=NA, direction.east=NA) {
 
+  #----- Some validation checks -----
   if ((typeof(point) != "double") ||
       length(point) != 3) {
     print("Spc.MakePlane: point should be a 3 number vector")
@@ -31,8 +33,27 @@ Spc.MakePlane <- function (point, normal, properties=NA) {
     print("Spc.MakePlane: normal should be a 3 number vector")
     return(NA)
   }
+  if (!is.na(direction.north) && 
+      (typeof(direction.north) != "double" || length(direction.north) != 3 ||
+       sum(Utils.CrossProduct(direction.north, normal)) == 0)) {
+    print("Spc.MakePlane: if supplied, direction.north should be a 3 number vector, and which is not parallel to normal")
+    return(NA)
+  }
+  if (!is.na(direction.east) && 
+      (typeof(direction.east) != "double" || length(direction.east) != 3 ||
+       sum(Utils.CrossProduct(direction.east, normal)) == 0 ||
+       sum(Utils.CrossProduct(direction.east, direction.north)) == 0)) {
+    print("Spc.MakePlane: if supplied, direction.east should be a 3 number vector, and which is not parallel to either the normal or direction.north")
+    return(NA)
+  }
+  if (is.na(direction.north[1]) != is.na(direction.east[1])) {
+    print("Spc.MakePlane: direction.north and direction,east should be either both supplied, or neither")
+    return(NA)
+  }
 
-  r <- list(point=point,normal=normal)
+  #------
+
+  r <- list(point=point,normal=normal,direction.north=direction.north,direction.east=direction.east)
 
   class(r) = append(class(r),"SpcPlane")
 
@@ -57,6 +78,10 @@ Spc.MakePlane <- function (point, normal, properties=NA) {
   plane$point <- (pivot.rotMatrix %*% (plane$point - pivot.point)) + pivot.point
   plane$normal <- pivot.rotMatrix %*% plane$normal
 
+  if (!is.na(plane$direction.north[1])) {
+    plane$direction.north <- pivot.rotMatrix %*% plane$direction.north
+    plane$direction.east <- pivot.rotMatrix %*% plane$direction.east
+  }
   return(plane)
 }
 

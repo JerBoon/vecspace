@@ -32,7 +32,7 @@
   if (t > 0) {
     #print(triangle)
     #print(paste(" intersected at ", t))
-    return(list(distance=t, properties=attr(triangle,"properties")))
+    return(list(distance=t, normal=Utils.CrossProduct(edge1,edge2), properties=attr(triangle,"properties")))
   } else
     return(NA)
 }
@@ -67,7 +67,9 @@
 
   #if $objects is defined then the sphere is merely a bounding object
   if (length(sphere$objects) == 0)
-    return(list(distance=t, properties=attr(sphere,"properties")))
+    return(list(distance=t,
+                normal=(ray.origin + ray.direction * t) - sphere$centre,
+                properties=attr(sphere,"properties")))
 
   #It's a bounding object, so pass $objects as a list and return that
     return(.Spc.Intersect(ray.origin,ray.direction,sphere$objects))
@@ -82,7 +84,19 @@
   t <- sum((plane$point - ray.origin) * plane$normal) / sum( ray.direction * plane$normal)
 
   if (t >= 0)
-    return (list(distance=t, properties=attr(plane,"properties")))
+    r <- list(distance=t, normal=plane$normal, properties=attr(plane,"properties"))
   else
    return (NA)
+
+  # -- calculate x and y if the plane has north and east
+  if (!is.na(plane$direction.north[1])) {
+
+    int.vector <- (ray.origin + ray.direction * t) - plane$point
+
+    print(int.vector)
+    r <- append(r, list(north=Utils.DotProduct(Utils.UnitVector(plane$direction.north),int.vector)/Utils.VectorLength(plane$direction.north),
+                        east=Utils.DotProduct(Utils.UnitVector(plane$direction.east),int.vector/Utils.VectorLength(plane$direction.east))))
+  }
+
+  return(r)
 }

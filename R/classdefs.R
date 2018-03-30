@@ -97,7 +97,9 @@ Spc.Rotate <- function(object, pivot.point=NA, pivot.angle) {
 #'
 #' @return A list of intersect properties, consisting of:
 #'    distance = intersect distance (as proportin of the length of ray.direction);
-#'    properties = the *properties* attribute from the intersected object (or NA if none)
+#'    normal = the surafce normal at the point of intersect. FOr the sake of efficiecy this will be of arbitrary length;
+#'    properties = the *properties* attribute from the intersected object (or NA if none);
+#'    north, east = where applicable, a pair of values representing the point of inetrsection from the object's perspective
 #'
 #' @export
 #'
