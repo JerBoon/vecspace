@@ -50,7 +50,7 @@ Spc.Combine <- function (objects, properties=NA, bound=TRUE) {
 
   class(r) <- append(class(r),"SpcCompound")
 
-  if (!is.na(properties))
+  if (!is.na(properties)[1])
     attr(r,"properties") <- properties
 
   if (!bound)

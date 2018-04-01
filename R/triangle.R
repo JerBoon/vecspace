@@ -31,7 +31,7 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
   r <- list(A=A, B=B, C=C)
   class(r) = append(class(r),"SpcTriangle")
 
-  if (!is.na(properties))
+  if (!is.na(properties)[1])
     attr(r,"properties") <- properties
 
   return(r)

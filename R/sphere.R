@@ -33,7 +33,7 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
   r <- list(centre=centre,radius=radius)
   class(r) = append(class(r),"SpcSphere")
 
-  if (!is.na(properties))
+  if (!is.na(properties)[1])
     attr(r,"properties") <- properties
 
   return(r)

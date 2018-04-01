@@ -93,7 +93,6 @@
 
     int.vector <- (ray.origin + ray.direction * t) - plane$point
 
-    print(int.vector)
     r <- append(r, list(north=Utils.DotProduct(Utils.UnitVector(plane$direction.north),int.vector)/Utils.VectorLength(plane$direction.north),
                         east=Utils.DotProduct(Utils.UnitVector(plane$direction.east),int.vector/Utils.VectorLength(plane$direction.east))))
   }

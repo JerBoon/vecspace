@@ -57,7 +57,7 @@ Spc.MakePlane <- function (point, normal, properties=NA, direction.north=NA, dir
 
   class(r) = append(class(r),"SpcPlane")
 
-  if (!is.na(properties))
+  if (!is.na(properties)[1])
     attr(r,"properties") <- properties
 
   return(r)
