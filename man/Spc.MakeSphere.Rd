@@ -4,7 +4,8 @@
 \alias{Spc.MakeSphere}
 \title{Return an elementary sphere object}
 \usage{
-Spc.MakeSphere(centre, radius, properties = NA)
+Spc.MakeSphere(centre, radius, properties = NA, direction.pole = NA,
+  direction.meridian = NA)
 }
 \arguments{
 \item{centre}{Centre of sphere}

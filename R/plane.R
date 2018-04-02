@@ -47,7 +47,7 @@ Spc.MakePlane <- function (point, normal, properties=NA, direction.north=NA, dir
     return(NA)
   }
   if (is.na(direction.north[1]) != is.na(direction.east[1])) {
-    print("Spc.MakePlane: direction.north and direction,east should be either both supplied, or neither")
+    print("Spc.MakePlane: direction.north and direction.east should be either both supplied, or neither")
     return(NA)
   }
 

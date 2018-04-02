@@ -66,10 +66,39 @@
 
 
   #if $objects is defined then the sphere is merely a bounding object
-  if (length(sphere$objects) == 0)
-    return(list(distance=t,
-                normal=(ray.origin + ray.direction * t) - sphere$centre,
-                properties=attr(sphere,"properties")))
+  #First up, though, if it's not a bounding sphere, it's an actual object...
+  if (length(sphere$objects) == 0) {
+  
+    normal <- (ray.origin + ray.direction * t) - sphere$centre
+
+    r <- list(distance=t,
+                normal=normal,
+                properties=attr(sphere,"properties"))
+
+    # -- calculate x and y if the plane has direction vectors
+    if (!is.na(sphere$direction.pole[1])) {
+  
+      #degrees north is easy enough
+      north <- 90 - (acos(Utils.DotProduct(Utils.UnitVector(sphere$direction.pole), Utils.UnitVector(normal))) * 180 / pi)
+
+      #degrees east is a tad more complicated
+      cp.meridian <- Utils.UnitVector(Utils.CrossProduct(sphere$direction.pole,sphere$direction.meridian))
+      cp.normal <- Utils.UnitVector(Utils.CrossProduct(sphere$direction.pole,normal))
+
+      east <- acos(Utils.DotProduct(cp.meridian,cp.normal)) *180 / pi
+
+      #This'll either point to north or south pole. If south, then adjust the eastings accordingly
+      cp.axis <- Utils.UnitVector(Utils.CrossProduct(cp.meridian,cp.normal))
+      if (east > 0 && east < 180 && Utils.VectorLength(cp.axis + Utils.UnitVector(sphere$direction.pole)) < 0.1)
+        east <- 360 - east
+
+
+      #append these two to the returned object
+      r <- append(r, list(north=north, east=east))
+    }
+
+    return(r)
+  }
 
   #It's a bounding object, so pass $objects as a list and return that
     return(.Spc.Intersect(ray.origin,ray.direction,sphere$objects))

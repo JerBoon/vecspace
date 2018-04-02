@@ -5,7 +5,7 @@
 \title{Plot an orthographic plan view along x, y and z axes}
 \usage{
 Spc.Plot(object, view.axis = NA, print.bounds = TRUE,
-  print.normals = TRUE)
+  print.normals = FALSE)
 }
 \arguments{
 \item{object}{The object (elementary or compound) to be plotted}

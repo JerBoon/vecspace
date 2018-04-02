@@ -7,6 +7,11 @@
 #' @param radius of sphere
 #' @param properties Package-independent object defining additional sphere properties
 #'     Default NA
+#' @direction.pole,direction.meridian Nominal north pole direction vector, and a direction vector 
+#'     to a point on the prime meridian.
+#'     If supplied, an intersect will also calculate and return components $north and $east, as the
+#'     polar coordinates north (-90 to 90) and east (0 - 360) of the intersection point on the sphere.
+#'     Alse, where supplied, these must not be parallel.
 #'
 #' @return Elementary sphere object
 #' 
@@ -17,7 +22,7 @@
 #' @examples
 #'   s <- Spc.MakeSphere(c(0,0,0), 2, surface_props)
 
-Spc.MakeSphere <- function (centre, radius, properties=NA) {
+Spc.MakeSphere <- function (centre, radius, properties=NA, direction.pole=NA, direction.meridian=NA) {
 
   if ((typeof(centre) != "double") ||
       length(centre) != 3) {
@@ -26,11 +31,29 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
   }
   if ((typeof(radius) != "double") ||
       length(radius) != 1) {
-    print("sphere.make: radius should be a number")
+    print("Spc.MakeSphere: radius should be a number")
+    return(NA)
+  }
+  if (!is.na(direction.pole) && 
+      (typeof(direction.pole) != "double" || length(direction.pole) != 3 ||
+       Utils.VectorLength(direction.pole) == 0)) {
+    print("Spc.MakeSphere: if supplied, direction.north should be a 3 number direction vector")
+    return(NA)
+  }
+  if (!is.na(direction.meridian) && 
+      (typeof(direction.meridian) != "double" || length(direction.meridian) != 3 ||
+       sum(Utils.CrossProduct(direction.meridian, direction.pole)) == 0)) {
+    print("Spc.MakeSphere: if supplied, direction.meridian should be a 3 number vector, and which is not parallel to direction.pole")
+    return(NA)
+  }
+  if (is.na(direction.pole[1]) != is.na(direction.meridian[1])) {
+    print("Spc.MakeSphere: direction.pole and direction.meridian should be either both supplied, or neither")
     return(NA)
   }
 
-  r <- list(centre=centre,radius=radius)
+  #---
+
+  r <- list(centre=centre,radius=radius,direction.pole=direction.pole,direction.meridian=direction.meridian)
   class(r) = append(class(r),"SpcSphere")
 
   if (!is.na(properties)[1])
@@ -56,6 +79,11 @@ Spc.MakeSphere <- function (centre, radius, properties=NA) {
 .Spc.Rotate.SpcSphere <- function(sphere, pivot.point, pivot.rotMatrix) {
 
   sphere$centre <- (pivot.rotMatrix %*% (sphere$centre - pivot.point)) + pivot.point
+
+  if (!is.na(sphere$direction.pole[1])) {
+    sphere$direction.pole <- pivot.rotMatrix %*% sphere$direction.pole
+    sphere$direction.meridian <- pivot.rotMatrix %*% sphere$direction.meridian
+  }
 
   if (length(sphere$objects) == 0)
     return(sphere)
