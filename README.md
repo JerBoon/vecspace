@@ -55,3 +55,15 @@ Further general constructors will allow you to, say, build a table from 5 simple
 be able to simply say "rotate my table" in a single statement. (And or course, the table itself can have a bounding sphere container)
 
 ![table](https://user-images.githubusercontent.com/23141865/37863006-9b27cef2-2f4e-11e8-89f9-a4203fde7501.png)
+
+### Ray tracing
+
+So the main reason for building this package is to facilitate ray tracing. You'll have to have a
+look at my **raytrace** package to get the code for that. That's still very much a work in progress, 
+but it's for the most part proven the design of this package. The way this package hasn't needed to care
+about how surface properties are defined has proved most useful.
+
+Here's a quick demo image from the ray tracing package as it stands. I still need to add in shadowing, trsnparency and
+a heap of stuff like that, but it's definitely coming along nicely now....
+
+![screen shot 2018-04-02 at 21 52 13](https://user-images.githubusercontent.com/23141865/38215573-32285308-36c0-11e8-9515-24f77de3ac88.png)
