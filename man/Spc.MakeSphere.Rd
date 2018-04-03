@@ -14,6 +14,12 @@ Spc.MakeSphere(centre, radius, properties = NA, direction.pole = NA,
 
 \item{properties}{Package-independent object defining additional sphere properties
 Default NA}
+
+\item{direction.pole, direction.meridian}{Nominal north pole direction vector, and a direction vector 
+to a point on the prime meridian.
+If supplied, an intersect will also calculate and return components $north and $east, as the
+polar coordinates north (-90 to 90) and east (0 - 360) of the intersection point on the sphere.
+Alse, where supplied, these must not be parallel.}
 }
 \value{
 Elementary sphere object

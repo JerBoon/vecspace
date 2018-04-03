@@ -7,7 +7,7 @@
 #' @param radius of sphere
 #' @param properties Package-independent object defining additional sphere properties
 #'     Default NA
-#' @direction.pole,direction.meridian Nominal north pole direction vector, and a direction vector 
+#' @param direction.pole,direction.meridian Nominal north pole direction vector, and a direction vector 
 #'     to a point on the prime meridian.
 #'     If supplied, an intersect will also calculate and return components $north and $east, as the
 #'     polar coordinates north (-90 to 90) and east (0 - 360) of the intersection point on the sphere.

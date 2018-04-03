@@ -1,4 +1,8 @@
 # This is the internal library of intersect methods for the elementary object types
+# In each case there are 2 functions.
+# Spc.Intersect - which returns the distance of intersection, and some surface properties
+# Spc.NoIntersect - which'll use the same basic calculation, but simple return whether the
+# intersect does not happen within distance 1
 
 #==============================================================================
 
@@ -35,6 +39,35 @@
     return(list(distance=t, normal=Utils.CrossProduct(edge1,edge2), properties=attr(triangle,"properties")))
   } else
     return(NA)
+}
+
+#--------------------
+
+.Spc.NoIntersect.SpcTriangle <-function(ray.origin,ray.direction,triangle) {
+
+  edge1 <- triangle$B - triangle$A
+  edge2 <- triangle$C - triangle$A
+  h <- Utils.CrossProduct(ray.direction,edge2)
+  a <- Utils.DotProduct(edge1,h)
+
+  if (a == 0)
+    return(TRUE)
+
+  f <- 1/a
+  s <- ray.origin - triangle$A
+  u <- f * Utils.DotProduct(s,h)
+
+  if (u < 0 || u > 1)
+    return(TRUE)
+    
+  q <- Utils.CrossProduct(s,edge1)
+  v = f * Utils.DotProduct(ray.direction,q)
+
+  if (v < 0 || u + v > 1)
+    return(TRUE)
+
+  t <- f * Utils.DotProduct(edge2,q)
+  return (t < 0 || t >= 1)
 }
 
 #==============================================================================
@@ -105,6 +138,38 @@
   
 }
 
+#--------------------
+
+.Spc.NoIntersect.SpcSphere <-function(ray.origin,ray.direction,sphere) {
+
+  a <- sum(ray.direction^2)
+  b <- 2 * Utils.DotProduct((ray.origin - sphere$centre),ray.direction)
+  c <- sum((ray.origin - sphere$centre)^2) - sphere$radius^2
+
+  d <- b^2 - 4 * a * c
+
+  if (d > 0) {
+    t1 <- (-b - sqrt(d)) / (2 * a)
+    t2 <- (-b + sqrt(d)) / (2 * a)
+    if (t1 < t2 && t1 > 0) {
+      t <- t1
+    } else {
+      t <- t2
+    }
+  } else {
+    return(TRUE)
+  }
+
+  if (t <= 0)
+    return(TRUE)
+
+  #If it's not a bounding sphere
+  if (length(sphere$objects) == 0)
+    return (t >= 1)
+
+  return(.Spc.NoIntersect(ray.origin,ray.direction,sphere$objects))
+}
+
 #==============================================================================
 
 .Spc.Intersect.SpcPlane <-function(ray.origin,ray.direction,plane) {
@@ -128,3 +193,14 @@
 
   return(r)
 }
+
+#--------------------
+
+.Spc.NoIntersect.SpcPlane <-function(ray.origin,ray.direction,plane) {
+
+  t <- sum((plane$point - ray.origin) * plane$normal) / sum( ray.direction * plane$normal)
+
+  return (t < 0 || t >= 1)
+}
+
+

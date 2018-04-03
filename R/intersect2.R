@@ -34,3 +34,21 @@
   return(int)
 }
 
+#--------------------------
+
+.Spc.NoIntersect.SpcCompound <- function(ray.origin, ray.vector, objects) {
+
+  if (length(objects) == 0)
+    return(TRUE)
+
+  int <- NA
+
+  for (i in 1:length(objects)) {
+    ii <- .Spc.NoIntersect(ray.origin, ray.vector, objects[[i]])
+
+    if (!ii) return(FALSE)
+  }
+  return(TRUE)
+}
+
+

@@ -14,6 +14,11 @@ Spc.MakePlane(point, normal, properties = NA, direction.north = NA,
 
 \item{properties}{Package-independent object defining additional plane properties.
 Default NA}
+
+\item{direction.north, direction.east}{Nominal north and east directional vectors along the plane.
+If supplied, an intersect will also calculate and return components $north and $east, as the
+amount of direction of north and east the intersect is from the plane centre point.
+Alse, where supplied, none of north, east or normal should be parallel.}
 }
 \value{
 Elementary plane object.

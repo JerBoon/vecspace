@@ -6,7 +6,7 @@
 #' @param normal A vector which is normal to the direction of the plane
 #' @param properties Package-independent object defining additional plane properties.
 #'     Default NA
-#' @direction.north,direction.east Nominal north and east directional vectors along the plane.
+#' @param direction.north,direction.east Nominal north and east directional vectors along the plane.
 #'     If supplied, an intersect will also calculate and return components $north and $east, as the
 #'     amount of direction of north and east the intersect is from the plane centre point.
 #'     Alse, where supplied, none of north, east or normal should be parallel.

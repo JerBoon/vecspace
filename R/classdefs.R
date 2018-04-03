@@ -115,6 +115,31 @@ Spc.Intersect <- function(ray.origin,ray.direction,object) {
   UseMethod(".Spc.Intersect", object)
 }
 
+#---------------------------------------------------------------------
+#' Kind of the opposite of Spc.Intersect(). Takes a ray origin and a direction vector
+#' of a given length, and returns whether any object falls between along the length of
+#' the direction vector. For use by shadowing and illumination calculations
+#'
+#' @param ray.origin A positional vector of where the ray originates
+#' @param ray.direction A directional vector for the ray's direction
+#' @param object The object (elementary or compound) we're testing for intersection
+#'
+#' @return Logical value - TRUE if nothing false along the ray direction vector, FALSE otherwise.
+#'
+#' @export
+#'
+#' @examples
+#'   if (Spc.NoIntersect (c(0,0,0), c(0,1,0),  my_world)) { do_something }
+
+Spc.NoIntersect <- function(ray.origin,ray.direction,object) {
+  .Spc.NoIntersect(ray.origin,ray.direction,object) 
+}
+
+.Spc.NoIntersect <- function(ray.origin,ray.direction,object) {
+
+  UseMethod(".Spc.NoIntersect", object)
+}
+
 # -----------------------------------------------------------------------
 
 #Boundrec returns the "upper" (max(x,y,z)) and "lower" corners of an
