@@ -66,4 +66,4 @@ about how surface properties are defined has proved most useful.
 Here's a quick demo image from the ray tracing package as it stands. I still need to add in shadowing, transparency and
 a heap of stuff like that, but it's definitely coming along nicely now....
 
-![screen shot 2018-04-02 at 21 52 13](https://user-images.githubusercontent.com/23141865/38215573-32285308-36c0-11e8-9515-24f77de3ac88.png)
+![screen shot 2018-04-04 at 19 57 56](https://user-images.githubusercontent.com/23141865/38328365-a71f59b2-3842-11e8-9cd9-6f43de52373d.png)
