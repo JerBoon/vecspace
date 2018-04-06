@@ -74,11 +74,12 @@
 
 .Spc.Intersect.SpcSphere <-function(ray.origin,ray.direction,sphere) {
 
+  disp <- ray.origin - sphere$centre
 
   #from http://cosinekitty.com/raytrace/chapter06_sphere.html
   a <- sum(ray.direction^2)
-  b <- 2 * c((ray.origin - sphere$centre) %*% ray.direction)
-  c <- sum((ray.origin - sphere$centre)^2) - sphere$radius^2
+  b <- 2 * c(disp %*% ray.direction)
+  c <- sum(disp^2) - sphere$radius^2
 
   d <- b^2 - 4 * a * c
 
@@ -142,9 +143,10 @@
 
 .Spc.NoIntersect.SpcSphere <-function(ray.origin,ray.direction,sphere) {
 
+  disp <- ray.origin - sphere$centre
   a <- sum(ray.direction^2)
-  b <- 2 * c((ray.origin - sphere$centre) %*% ray.direction)
-  c <- sum((ray.origin - sphere$centre)^2) - sphere$radius^2
+  b <- 2 * c(disp %*% ray.direction)
+  c <- sum(disp^2) - sphere$radius^2
 
   d <- b^2 - 4 * a * c
 
