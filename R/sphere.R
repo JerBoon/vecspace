@@ -78,11 +78,11 @@ Spc.MakeSphere <- function (centre, radius, properties=NA, direction.pole=NA, di
 #------------------------------------------------------------------------------
 .Spc.Rotate.SpcSphere <- function(sphere, pivot.point, pivot.rotMatrix) {
 
-  sphere$centre <- (pivot.rotMatrix %*% (sphere$centre - pivot.point)) + pivot.point
+  sphere$centre <- c((pivot.rotMatrix %*% (sphere$centre - pivot.point)) + pivot.point)
 
   if (!is.na(sphere$direction.pole[1])) {
-    sphere$direction.pole <- pivot.rotMatrix %*% sphere$direction.pole
-    sphere$direction.meridian <- pivot.rotMatrix %*% sphere$direction.meridian
+    sphere$direction.pole <- c(pivot.rotMatrix %*% sphere$direction.pole)
+    sphere$direction.meridian <- c(pivot.rotMatrix %*% sphere$direction.meridian)
   }
 
   if (length(sphere$objects) == 0)

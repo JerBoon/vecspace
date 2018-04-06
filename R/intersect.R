@@ -14,25 +14,25 @@
   edge1 <- triangle$B - triangle$A
   edge2 <- triangle$C - triangle$A
   h <- Utils.CrossProduct(ray.direction,edge2)
-  a <- Utils.DotProduct(edge1,h)
+  a <- c(edge1 %*% h)
 
   if (a == 0)
     return(NA)
 
   f <- 1/a
   s <- ray.origin - triangle$A
-  u <- f * Utils.DotProduct(s,h)
+  u <- f * c(s %*% h)
 
   if (u < 0 || u > 1)
     return(NA)
     
   q <- Utils.CrossProduct(s,edge1)
-  v = f * Utils.DotProduct(ray.direction,q)
+  v = f * c(ray.direction %*% q)
 
   if (v < 0 || u + v > 1)
     return(NA)
 
-  t <- f * Utils.DotProduct(edge2,q)
+  t <- f * c(edge2 %*% q)
   if (t > 0) {
     #print(triangle)
     #print(paste(" intersected at ", t))
@@ -48,25 +48,25 @@
   edge1 <- triangle$B - triangle$A
   edge2 <- triangle$C - triangle$A
   h <- Utils.CrossProduct(ray.direction,edge2)
-  a <- Utils.DotProduct(edge1,h)
+  a <- c(edge1 %*% h)
 
   if (a == 0)
     return(TRUE)
 
   f <- 1/a
   s <- ray.origin - triangle$A
-  u <- f * Utils.DotProduct(s,h)
+  u <- f * c(s %*% h)
 
   if (u < 0 || u > 1)
     return(TRUE)
     
   q <- Utils.CrossProduct(s,edge1)
-  v = f * Utils.DotProduct(ray.direction,q)
+  v = f * c(ray.direction %*% q)
 
   if (v < 0 || u + v > 1)
     return(TRUE)
 
-  t <- f * Utils.DotProduct(edge2,q)
+  t <- f * c(edge2 %*% q)
   return (t < 0 || t >= 1)
 }
 
@@ -77,7 +77,7 @@
 
   #from http://cosinekitty.com/raytrace/chapter06_sphere.html
   a <- sum(ray.direction^2)
-  b <- 2 * Utils.DotProduct((ray.origin - sphere$centre),ray.direction)
+  b <- 2 * c((ray.origin - sphere$centre) %*% ray.direction)
   c <- sum((ray.origin - sphere$centre)^2) - sphere$radius^2
 
   d <- b^2 - 4 * a * c
@@ -112,13 +112,13 @@
     if (!is.na(sphere$direction.pole[1])) {
   
       #degrees north is easy enough
-      north <- 90 - (acos(Utils.DotProduct(Utils.UnitVector(sphere$direction.pole), Utils.UnitVector(normal))) * 180 / pi)
+      north <- 90 - (acos(c(Utils.UnitVector(sphere$direction.pole) %*% Utils.UnitVector(normal))) * 180 / pi)
 
       #degrees east is a tad more complicated
       cp.meridian <- Utils.UnitVector(Utils.CrossProduct(sphere$direction.pole,sphere$direction.meridian))
       cp.normal <- Utils.UnitVector(Utils.CrossProduct(sphere$direction.pole,normal))
 
-      east <- acos(Utils.DotProduct(cp.meridian,cp.normal)) *180 / pi
+      east <- acos(c(cp.meridian %*% cp.normal)) *180 / pi
 
       #This'll either point to north or south pole. If south, then adjust the eastings accordingly
       cp.axis <- Utils.UnitVector(Utils.CrossProduct(cp.meridian,cp.normal))
@@ -143,7 +143,7 @@
 .Spc.NoIntersect.SpcSphere <-function(ray.origin,ray.direction,sphere) {
 
   a <- sum(ray.direction^2)
-  b <- 2 * Utils.DotProduct((ray.origin - sphere$centre),ray.direction)
+  b <- 2 * c((ray.origin - sphere$centre) %*% ray.direction)
   c <- sum((ray.origin - sphere$centre)^2) - sphere$radius^2
 
   d <- b^2 - 4 * a * c
@@ -187,8 +187,8 @@
 
     int.vector <- (ray.origin + ray.direction * t) - plane$point
 
-    r <- append(r, list(north=Utils.DotProduct(Utils.UnitVector(plane$direction.north),int.vector)/Utils.VectorLength(plane$direction.north),
-                        east=Utils.DotProduct(Utils.UnitVector(plane$direction.east),int.vector/Utils.VectorLength(plane$direction.east))))
+    r <- append(r, list(north=c(Utils.UnitVector(plane$direction.north) %*% int.vector)/Utils.VectorLength(plane$direction.north),
+                        east=c(Utils.UnitVector(plane$direction.east) %*% int.vector/Utils.VectorLength(plane$direction.east))))
   }
 
   return(r)
