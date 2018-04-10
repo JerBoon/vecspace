@@ -18,7 +18,7 @@
   for (i in 1:length(objects)) {
     ii <- .Spc.Intersect(ray.origin, ray.vector, objects[[i]])
 
-    if (!is.na(ii) && (is.na(int) || ii$distance < int$distance))
+    if (!is.na(ii[1]) && (is.na(int[1]) || ii$distance < int$distance))
       int <- ii
   }
 

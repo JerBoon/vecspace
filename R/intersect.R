@@ -11,10 +11,8 @@
   #Moller-Trumbore algorith, from
   #https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm
 
-  edge1 <- triangle$B - triangle$A
-  edge2 <- triangle$C - triangle$A
-  h <- Utils.CrossProduct(ray.direction,edge2)
-  a <- c(edge1 %*% h)
+  h <- Utils.CrossProduct(ray.direction,triangle$edge2)
+  a <- c(triangle$edge1 %*% h)
 
   if (a == 0)
     return(NA)
@@ -26,17 +24,17 @@
   if (u < 0 || u > 1)
     return(NA)
     
-  q <- Utils.CrossProduct(s,edge1)
+  q <- Utils.CrossProduct(s,triangle$edge1)
   v = f * c(ray.direction %*% q)
 
   if (v < 0 || u + v > 1)
     return(NA)
 
-  t <- f * c(edge2 %*% q)
+  t <- f * c(triangle$edge2 %*% q)
   if (t > 0) {
     #print(triangle)
     #print(paste(" intersected at ", t))
-    return(list(distance=t, normal=Utils.CrossProduct(edge1,edge2), properties=attr(triangle,"properties")))
+    return(list(distance=t, normal=Utils.CrossProduct(triangle$edge1,triangle$edge2), properties=attr(triangle,"properties")))
   } else
     return(NA)
 }
@@ -45,10 +43,8 @@
 
 .Spc.NoIntersect.SpcTriangle <-function(ray.origin,ray.direction,triangle) {
 
-  edge1 <- triangle$B - triangle$A
-  edge2 <- triangle$C - triangle$A
-  h <- Utils.CrossProduct(ray.direction,edge2)
-  a <- c(edge1 %*% h)
+  h <- Utils.CrossProduct(ray.direction,triangle$edge2)
+  a <- c(triangle$edge1 %*% h)
 
   if (a == 0)
     return(TRUE)
@@ -60,13 +56,13 @@
   if (u < 0 || u > 1)
     return(TRUE)
     
-  q <- Utils.CrossProduct(s,edge1)
+  q <- Utils.CrossProduct(s,triangle$edge1)
   v = f * c(ray.direction %*% q)
 
   if (v < 0 || u + v > 1)
     return(TRUE)
 
-  t <- f * c(edge2 %*% q)
+  t <- f * c(triangle$edge2 %*% q)
   return (t < 0 || t >= 1)
 }
 

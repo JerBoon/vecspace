@@ -28,7 +28,9 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
     return(NA)
   }
 
-  r <- list(A=A, B=B, C=C)
+  edge1 <- B - A
+  edge2 <- C - A
+  r <- list(A=A, B=B, C=C, edge1=edge1, edge2=edge2)
   class(r) = append(class(r),"SpcTriangle")
 
   if (!is.na(properties)[1])
@@ -54,6 +56,9 @@ Spc.MakeTriangle <- function (A,B,C, properties=NA) {
   triangle$A <- c((pivot.rotMatrix %*% (triangle$A - pivot.point)) + pivot.point)
   triangle$B <- c((pivot.rotMatrix %*% (triangle$B - pivot.point)) + pivot.point)
   triangle$C <- c((pivot.rotMatrix %*% (triangle$C - pivot.point)) + pivot.point)
+
+  triangle$edge1 <- c(pivot.rotMatrix %*% triangle$edge1)
+  triangle$edge2 <- c(pivot.rotMatrix %*% triangle$edge2)
 
   return(triangle)
 }
