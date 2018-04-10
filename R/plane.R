@@ -53,7 +53,9 @@ Spc.MakePlane <- function (point, normal, properties=NA, direction.north=NA, dir
 
   #------
 
-  r <- list(point=point,normal=normal,direction.north=direction.north,direction.east=direction.east)
+  r <- list(point=point,normal=normal,
+            direction.north.unit=Utils.UnitVector(direction.north), direction.north.length=Utils.VectorLength(direction.north),
+            direction.east.unit=Utils.UnitVector(direction.east), direction.east.length=Utils.VectorLength(direction.east))
 
   class(r) = append(class(r),"SpcPlane")
 
@@ -78,9 +80,9 @@ Spc.MakePlane <- function (point, normal, properties=NA, direction.north=NA, dir
   plane$point <- c((pivot.rotMatrix %*% (plane$point - pivot.point)) + pivot.point)
   plane$normal <- c(pivot.rotMatrix %*% plane$normal)
 
-  if (!is.na(plane$direction.north[1])) {
-    plane$direction.north <- c(pivot.rotMatrix %*% plane$direction.north)
-    plane$direction.east <- c(pivot.rotMatrix %*% plane$direction.east)
+  if (!is.na(plane$direction.north.unit[1])) {
+    plane$direction.north.unit <- c(pivot.rotMatrix %*% plane$direction.north.unit)
+    plane$direction.east.unit <- c(pivot.rotMatrix %*% plane$direction.east.unit)
   }
   return(plane)
 }

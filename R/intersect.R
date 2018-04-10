@@ -181,12 +181,12 @@
    return (NA)
 
   # -- calculate x and y if the plane has north and east
-  if (!is.na(plane$direction.north[1])) {
+  if (!is.na(plane$direction.north.unit[1])) {
 
     int.vector <- (ray.origin + ray.direction * t) - plane$point
 
-    r <- append(r, list(north=c(Utils.UnitVector(plane$direction.north) %*% int.vector)/Utils.VectorLength(plane$direction.north),
-                        east=c(Utils.UnitVector(plane$direction.east) %*% int.vector/Utils.VectorLength(plane$direction.east))))
+    r <- append(r, list(north=c(plane$direction.north.unit %*% int.vector)/plane$direction.north.length,
+                        east=c(plane$direction.east.unit %*% int.vector)/plane$direction.east.length))
   }
 
   return(r)
